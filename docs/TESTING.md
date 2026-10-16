@@ -41,19 +41,23 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\test.ps1 -Model
 .\.venv\Scripts\python.exe -m deadline_engine desktop --self-test --smoke-inference --test-device cpu --output results/native-cpu.json
 ```
 
-On a compatible NVIDIA computer, install the CUDA dependency set and verify real
-execution. Setup does not install or change a GPU driver:
+On a compatible NVIDIA computer, explicitly replace the CPU test environment
+with the CUDA dependency set, then verify real execution. Close the app first.
+Setup does not install or change a GPU driver:
 
 ```powershell
-py -3.14 scripts/bootstrap.py --backend cuda --download-weights
+py -3.14 scripts/bootstrap.py --backend cuda --replace-backend --download-weights
 .\.venv\Scripts\python.exe -m deadline_engine doctor
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\test.ps1 -Hardware
 .\.venv\Scripts\python.exe -m deadline_engine desktop --self-test --smoke-inference --test-device cuda --output results/native-cuda.json
 ```
 
-Bootstrap reuses `.venv`; selecting another backend changes its installed
-dependency set. Do not run setup while an experiment is using that environment.
-On a POSIX shell, the equivalent explicit test gates are:
+Bootstrap reuses `.venv` and preserves an existing CPU/CUDA installation by
+default. A different backend is refused unless `--replace-backend` is supplied.
+For two independent installations, use `--environment` with another directory
+and run that environment's interpreter. Do not run setup while an experiment
+is using the environment being changed. On a POSIX shell, the explicit test
+gates are:
 
 ```sh
 RUN_MODEL_TESTS=1 RUN_GPU_TESTS=1 ./.venv/bin/python -m unittest discover -s tests -v

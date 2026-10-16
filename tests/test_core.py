@@ -194,11 +194,21 @@ class SchedulerTests(unittest.TestCase):
 
     def test_late_completion_and_queued_expiry_are_distinct(self):
         settings = config(queue_capacity=32)
-        # The first inference starts in time, but its 80 ms service outlasts a
-        # 50 ms deadline. Waiting requests expire before receiving device work.
-        schedule = [planned(i, 0.0, 50.0) for i in range(8)]
-        result = replay(settings, schedule, "fifo", FakeBackend(service_s=0.08))
+        class CrossDeadlineBackend(FakeBackend):
+            def infer(self, requests):
+                # Synchronize against the actual request deadline, rather than
+                # assuming a 50 ms window is enough for a hosted OS to schedule
+                # both threads. Keep this one call in flight until it is late.
+                self.started_before_deadline = time.perf_counter() < requests[0].deadline_s
+                target = max(request.deadline_s for request in requests) + 0.005
+                while (remaining := target - time.perf_counter()) > 0:
+                    time.sleep(min(remaining, 0.01))
+                return super().infer(requests)
+        backend = CrossDeadlineBackend(service_s=0)
+        schedule = [planned(i, 0.0, 500.0) for i in range(8)]
+        result = replay(settings, schedule, "fifo", backend)
         self.assertConserved(result, schedule, settings.queue_capacity)
+        self.assertTrue(backend.started_before_deadline)
         self.assertGreater(result["summary"]["completed_late"], 0)
         self.assertGreater(result["summary"]["expired"], 0)
         self.assertEqual(result["summary"]["completed_on_time"], 0)

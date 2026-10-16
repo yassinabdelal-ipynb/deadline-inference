@@ -5,6 +5,7 @@ from dataclasses import asdict
 import json
 from pathlib import Path
 import tempfile
+import time
 import unittest
 from unittest.mock import patch
 
@@ -134,7 +135,16 @@ class NativeDesktopTests(unittest.TestCase):
         result = measured_result()
         self.controller.state.update(status="completed", results=[result], config=result["config"])
         self.app._render(self.controller.snapshot())
-        self.app.update_idletasks()
+        # Aqua delivers native Configure events through the full event loop,
+        # sometimes after idle layout work. Wait for actual drawable geometry
+        # rather than treating one update_idletasks call as a mapped canvas.
+        deadline = time.monotonic() + 2
+        while time.monotonic() < deadline:
+            self.app.update()
+            self.app._draw_chart()
+            if self.app.chart.winfo_width() > 100 and self.app.chart.winfo_height() >= 80 and self.app.chart.find_all():
+                break
+            time.sleep(0.01)
         self.assertIn("OK", self.app.accounting.get())
         self.assertGreater(len(self.app.results_table.get_children()), 15)
         self.assertGreater(len(self.app.chart.find_all()), 0)
@@ -147,7 +157,12 @@ class NativeDesktopTests(unittest.TestCase):
             summary = output["results"][0]["summary"]
             self.assertEqual(summary["submitted"], sum(summary[k] for k in TERMINAL))
         self.app.geometry("1000x690")
-        self.app.update()
+        deadline = time.monotonic() + 2
+        while time.monotonic() < deadline:
+            self.app.update()
+            if self.app.chart.winfo_width() > 100 and self.app.chart.winfo_height() > 60:
+                break
+            time.sleep(0.01)
         self.assertGreater(self.app.chart.winfo_width(), 100)
         self.assertGreater(self.app.chart.winfo_height(), 60)
 

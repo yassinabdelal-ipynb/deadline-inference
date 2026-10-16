@@ -38,3 +38,13 @@ results/desktop*/
 results/packaged*/
 results/revision*/
 *.zip
+
+# Preserve local development history without publishing superseded measurements.
+docs/ENGINEERING_LOG.md
+docs/RESULTS.md
+docs/REVISION_CPU_RESULTS.md
+results/**
+!results/image-models/
+!results/image-models/**/
+!results/image-models/**/comparison.csv
+!results/image-models/**/profile.csv
