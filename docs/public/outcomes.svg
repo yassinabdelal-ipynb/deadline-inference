@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="620" viewBox="0 0 1040 620" role="img" aria-labelledby="title desc">
+<title id="title">Every submitted request accounted for</title><desc id="desc">Outcomes combined across both policies and two seeds per model and device. 1824 submitted, 936 on time, 101 late, 787 expired. Not a policy comparison.</desc>
+<defs><pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse"><rect width="6" height="6" fill="#DDD8CD"/><path d="M0 6L6 0" stroke="#545A50" stroke-width="1"/></pattern></defs>
+<rect width="1040" height="100%" fill="#FFFDF8"/>
+<g font-family="system-ui, -apple-system, Segoe UI, sans-serif" fill="#242722">
+<text x="28" y="37" font-size="22" font-weight="650">Every submitted request accounted for</text>
+<text x="28" y="64" font-size="13" fill="#545A50">32 corrected replays / 16 matched pairs | both policies combined here to show accounting</text>
+<rect x="28" y="82" width="18" height="12" fill="#465D45" stroke="#545A50"/><text x="54" y="93" font-size="13">On time</text>
+<rect x="180" y="82" width="18" height="12" fill="#C5BFB3" stroke="#545A50"/><text x="206" y="93" font-size="13">Completed late</text>
+<rect x="380" y="82" width="18" height="12" fill="url(#hatch)" stroke="#545A50"/><text x="406" y="93" font-size="13">Expired before inference</text>
+<text x="244" y="146" text-anchor="end" font-size="13">MobileNetV3-Small / CPU</text>
+<rect x="264.00" y="127" width="199.82" height="28" fill="#465D45" stroke="#FFFDF8" stroke-width="1"/>
+<text x="363.91" y="146" fill="#FFFDF8" text-anchor="middle" font-size="12">67</text>
+<rect x="463.82" y="127" width="68.60" height="28" fill="#C5BFB3" stroke="#FFFDF8" stroke-width="1"/>
+<text x="498.12" y="146" fill="#242722" text-anchor="middle" font-size="12">23</text>
+<rect x="532.42" y="127" width="411.58" height="28" fill="url(#hatch)" stroke="#FFFDF8" stroke-width="1"/>
+<rect x="721.21" y="132" width="34" height="18" fill="#DDD8CD"/>
+<text x="738.21" y="146" fill="#242722" text-anchor="middle" font-size="12">138</text>
+<text x="959" y="146" font-size="12">228</text>
+<text x="244" y="196" text-anchor="end" font-size="13">MobileNetV3-Small / CUDA</text>
+<rect x="264.00" y="177" width="521.93" height="28" fill="#465D45" stroke="#FFFDF8" stroke-width="1"/>
+<text x="524.96" y="196" fill="#FFFDF8" text-anchor="middle" font-size="12">175</text>
+<rect x="785.93" y="177" width="23.86" height="28" fill="#C5BFB3" stroke="#FFFDF8" stroke-width="1"/>
+<rect x="809.79" y="177" width="134.21" height="28" fill="url(#hatch)" stroke="#FFFDF8" stroke-width="1"/>
+<rect x="859.89" y="182" width="34" height="18" fill="#DDD8CD"/>
+<text x="876.89" y="196" fill="#242722" text-anchor="middle" font-size="12">45</text>
+<text x="959" y="196" font-size="12">228</text>
+<text x="244" y="246" text-anchor="end" font-size="13">ResNet18 / CPU</text>
+<rect x="264.00" y="227" width="32.81" height="28" fill="#465D45" stroke="#FFFDF8" stroke-width="1"/>
+<text x="280.40" y="246" fill="#FFFDF8" text-anchor="middle" font-size="12">11</text>
+<rect x="296.81" y="227" width="35.79" height="28" fill="#C5BFB3" stroke="#FFFDF8" stroke-width="1"/>
+<text x="314.70" y="246" fill="#242722" text-anchor="middle" font-size="12">12</text>
+<rect x="332.60" y="227" width="611.40" height="28" fill="url(#hatch)" stroke="#FFFDF8" stroke-width="1"/>
+<rect x="621.30" y="232" width="34" height="18" fill="#DDD8CD"/>
+<text x="638.30" y="246" fill="#242722" text-anchor="middle" font-size="12">205</text>
+<text x="959" y="246" font-size="12">228</text>
+<text x="244" y="296" text-anchor="end" font-size="13">ResNet18 / CUDA</text>
+<rect x="264.00" y="277" width="566.67" height="28" fill="#465D45" stroke="#FFFDF8" stroke-width="1"/>
+<text x="547.33" y="296" fill="#FFFDF8" text-anchor="middle" font-size="12">190</text>
+<rect x="830.67" y="277" width="14.91" height="28" fill="#C5BFB3" stroke="#FFFDF8" stroke-width="1"/>
+<rect x="845.58" y="277" width="98.42" height="28" fill="url(#hatch)" stroke="#FFFDF8" stroke-width="1"/>
+<rect x="877.79" y="282" width="34" height="18" fill="#DDD8CD"/>
+<text x="894.79" y="296" fill="#242722" text-anchor="middle" font-size="12">33</text>
+<text x="959" y="296" font-size="12">228</text>
+<text x="244" y="346" text-anchor="end" font-size="13">EfficientNet-B0 / CPU</text>
+<rect x="264.00" y="327" width="340.00" height="28" fill="#465D45" stroke="#FFFDF8" stroke-width="1"/>
+<text x="434.00" y="346" fill="#FFFDF8" text-anchor="middle" font-size="12">114</text>
+<rect x="604.00" y="327" width="32.81" height="28" fill="#C5BFB3" stroke="#FFFDF8" stroke-width="1"/>
+<text x="620.40" y="346" fill="#242722" text-anchor="middle" font-size="12">11</text>
+<rect x="636.81" y="327" width="307.19" height="28" fill="url(#hatch)" stroke="#FFFDF8" stroke-width="1"/>
+<rect x="773.40" y="332" width="34" height="18" fill="#DDD8CD"/>
+<text x="790.40" y="346" fill="#242722" text-anchor="middle" font-size="12">103</text>
+<text x="959" y="346" font-size="12">228</text>
+<text x="244" y="396" text-anchor="end" font-size="13">EfficientNet-B0 / CUDA</text>
+<rect x="264.00" y="377" width="429.47" height="28" fill="#465D45" stroke="#FFFDF8" stroke-width="1"/>
+<text x="478.74" y="396" fill="#FFFDF8" text-anchor="middle" font-size="12">144</text>
+<rect x="693.47" y="377" width="29.82" height="28" fill="#C5BFB3" stroke="#FFFDF8" stroke-width="1"/>
+<rect x="723.30" y="377" width="220.70" height="28" fill="url(#hatch)" stroke="#FFFDF8" stroke-width="1"/>
+<rect x="816.65" y="382" width="34" height="18" fill="#DDD8CD"/>
+<text x="833.65" y="396" fill="#242722" text-anchor="middle" font-size="12">74</text>
+<text x="959" y="396" font-size="12">228</text>
+<text x="244" y="446" text-anchor="end" font-size="13">SqueezeNet1.1 / CPU</text>
+<rect x="264.00" y="427" width="83.51" height="28" fill="#465D45" stroke="#FFFDF8" stroke-width="1"/>
+<text x="305.75" y="446" fill="#FFFDF8" text-anchor="middle" font-size="12">28</text>
+<rect x="347.51" y="427" width="86.49" height="28" fill="#C5BFB3" stroke="#FFFDF8" stroke-width="1"/>
+<text x="390.75" y="446" fill="#242722" text-anchor="middle" font-size="12">29</text>
+<rect x="434.00" y="427" width="510.00" height="28" fill="url(#hatch)" stroke="#FFFDF8" stroke-width="1"/>
+<rect x="672.00" y="432" width="34" height="18" fill="#DDD8CD"/>
+<text x="689.00" y="446" fill="#242722" text-anchor="middle" font-size="12">171</text>
+<text x="959" y="446" font-size="12">228</text>
+<text x="244" y="496" text-anchor="end" font-size="13">SqueezeNet1.1 / CUDA</text>
+<rect x="264.00" y="477" width="617.37" height="28" fill="#465D45" stroke="#FFFDF8" stroke-width="1"/>
+<text x="572.68" y="496" fill="#FFFDF8" text-anchor="middle" font-size="12">207</text>
+<rect x="881.37" y="477" width="8.95" height="28" fill="#C5BFB3" stroke="#FFFDF8" stroke-width="1"/>
+<rect x="890.32" y="477" width="53.68" height="28" fill="url(#hatch)" stroke="#FFFDF8" stroke-width="1"/>
+<rect x="900.16" y="482" width="34" height="18" fill="#DDD8CD"/>
+<text x="917.16" y="496" fill="#242722" text-anchor="middle" font-size="12">18</text>
+<text x="959" y="496" font-size="12">228</text>
+<text x="28" y="557" font-size="17" font-weight="600">1,824 submitted = 936 on time + 101 late + 787 expired</text>
+<text x="28" y="583" font-size="12" fill="#545A50">Zero rejected, failed or cancelled in this fixture. Expiry is discarded work, not a successful answer.</text>
+<text x="28" y="605" font-size="12" fill="#545A50">Equal relative deadlines make EDF request order match FIFO; batching and collection also change between policies.</text>
+</g></svg>

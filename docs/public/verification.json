@@ -1,0 +1,50 @@
+{
+  "version": "0.3.1",
+  "recorded_date": "2026-10-16",
+  "scope": "Local Windows laptop; hosted CI results are on GitHub Actions, not implied here.",
+  "source_tests": {
+    "count": 96,
+    "duration_seconds": 28.681,
+    "passed": true,
+    "hardware_enabled": true,
+    "skipped": 0,
+    "command": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/test.ps1 -Hardware"
+  },
+  "native_cuda": {
+    "checks_passed": true,
+    "tested_model": "mobilenet_v3_small",
+    "tested_device": "cuda",
+    "status": "completed",
+    "server_started": false,
+    "run_enabled": true,
+    "cancel_disabled": true,
+    "device_name": "NVIDIA GeForce RTX 5060 Laptop GPU",
+    "torch_version": "2.12.0+cu130",
+    "policy_summaries": [
+      {
+        "submitted": 12,
+        "completed_on_time": 12,
+        "completed_late": 0,
+        "expired": 0,
+        "rejected": 0,
+        "failed": 0,
+        "cancelled_queued": 0,
+        "cancelled_in_flight": 0
+      },
+      {
+        "submitted": 12,
+        "completed_on_time": 12,
+        "completed_late": 0,
+        "expired": 0,
+        "rejected": 0,
+        "failed": 0,
+        "cancelled_queued": 0,
+        "cancelled_in_flight": 0
+      }
+    ]
+  },
+  "windows_cpu_release": {
+    "verified": false,
+    "note": "Rebuild and extracted-application verification pending."
+  }
+}

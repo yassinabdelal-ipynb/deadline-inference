@@ -1,0 +1,16 @@
+name: Experiment or feature idea
+description: Propose a useful inference experiment or improvement.
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What question or problem would this address?
+    validations:
+      required: true
+  - type: textarea
+    id: measurement
+    attributes:
+      label: How would we verify that it helps?
+      description: Describe an observable result, workload, or correctness check.
+    validations:
+      required: true

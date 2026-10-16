@@ -1,0 +1,91 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tests-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  reference:
+    name: Reference / ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.14'
+          allow-prereleases: false
+      - name: Reference tests, no inference dependencies or downloads
+        env:
+          RUN_GPU_TESTS: '0'
+          RUN_MODEL_TESTS: '0'
+        run: python -m unittest discover -s tests -v
+      - name: Check source publication inputs
+        run: python scripts/check_release.py --source
+
+  cpu-model:
+    name: Pretrained CPU / ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.14'
+          allow-prereleases: false
+      - name: Install pinned CPU packages and explicitly fetch default checkpoint
+        run: |
+          python scripts/bootstrap.py --backend cpu --download-weights
+          python -c "import os; print('PROJECT_PYTHON='+os.path.abspath('.venv/Scripts/python.exe' if os.name=='nt' else '.venv/bin/python'))" >> "$GITHUB_ENV"
+      - name: Real pretrained CPU checks
+        env:
+          RUN_MODEL_TESTS: '1'
+          RUN_GPU_TESTS: '0'
+        run: '"$PROJECT_PYTHON" -m unittest discover -s tests -p test_hardware.py -v'
+      - name: Matched CPU replay and independent accounting
+        run: |
+          "$PROJECT_PYTHON" -m deadline_engine demo --device cpu --duration 0.3 --rate 20 --pattern steady --deadline 1000 --batch 2 --output results/ci-cpu
+          "$PROJECT_PYTHON" scripts/analyze_results.py --input results/ci-cpu/comparison.json --output results/ci-cpu/summary.json --no-markdown
+      - name: Native desktop smoke on Windows
+        if: runner.os == 'Windows'
+        run: '"$PROJECT_PYTHON" -m deadline_engine desktop --self-test --smoke-inference --output results/ci-desktop.json'
+      - name: Native desktop smoke through Linux virtual display
+        if: runner.os == 'Linux'
+        run: 'xvfb-run -a "$PROJECT_PYTHON" -m deadline_engine desktop --self-test --smoke-inference --output results/ci-desktop.json'
+      - name: Retain diagnostics
+        if: always()
+        uses: actions/upload-artifact@bbbca2ddaa5d8feaa63e36b76fdaad77386f024f # v7.0.0
+        with:
+          name: cpu-evidence-${{ matrix.os }}
+          path: |
+            results/environment.json
+            results/ci-cpu/comparison.json
+            results/ci-desktop.json
+          if-no-files-found: ignore
+          retention-days: 7
+
+# Hosted jobs measure CPU only. They do not demonstrate CUDA or certify
+# another physical desktop; CUDA checks are explicit on a configured local GPU.

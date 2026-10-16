@@ -1,0 +1,40 @@
+name: Bug report
+description: Report a reproducible problem with setup, inference, or the desktop app.
+title: "[Bug] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please remove personal paths and private checkpoint names from logs. Do not upload model weights, credentials, or a full system diagnostic.
+  - type: input
+    id: version
+    attributes:
+      label: App version and installation
+      placeholder: "0.3.1 Windows CPU ZIP, or source commit"
+    validations:
+      required: true
+  - type: input
+    id: system
+    attributes:
+      label: Operating system and selected device
+      placeholder: "Windows 11 x64 / CPU; or Ubuntu / CUDA / GPU and driver"
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Include the model, workload settings, and whether weights were fetched or imported.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected result and actual result
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant error or redacted log
+      render: text

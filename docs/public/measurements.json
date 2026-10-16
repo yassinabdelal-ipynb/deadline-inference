@@ -1,0 +1,2946 @@
+{
+  "schema_version": 1,
+  "scope": "Observed on one interactive Windows laptop; synthetic inputs do not measure accuracy.",
+  "host": {
+    "os": "Windows 11 10.0.26200 AMD64",
+    "python": "3.14.7",
+    "gpu": "NVIDIA GeForce RTX 5060 Laptop GPU",
+    "vram_mib": 8150.5625,
+    "driver": "596.08",
+    "cpu": "Intel64 Family 6 Model 186 Stepping 2, GenuineIntel",
+    "logical_processors": 16
+  },
+  "workload": {
+    "input": "procedural RGB float32 224 x 224; ImageNet normalization",
+    "profile_batches": [
+      1,
+      4
+    ],
+    "samples_per_batch": 10,
+    "timing": "Setup/calibration and two additional warmups excluded; CUDA events synchronized.",
+    "scheduling_pattern": "bursty",
+    "arrival_window_seconds": 0.6,
+    "base_rate_per_second": 40,
+    "burst_multiplier": 5,
+    "deadline_ms": 1000,
+    "max_batch": 4,
+    "collection_ms": 4,
+    "queue_capacity": 128,
+    "seeds": [
+      7,
+      8
+    ],
+    "policy_order": "alternates between seeds",
+    "arrival_clock": "Corrected monotonic wait loop; submissions cannot precede planned arrivals."
+  },
+  "models": [
+    {
+      "model": "mobilenet_v3_small",
+      "url": "https://download.pytorch.org/models/mobilenet_v3_small-047dcff4.pth",
+      "sha256": "047dcff4addef86ea5bc2eff13c9614dc11f47ab1160d0a71a25e7db994f4e1f",
+      "bytes": 10306551
+    },
+    {
+      "model": "resnet18",
+      "url": "https://download.pytorch.org/models/resnet18-f37072fd.pth",
+      "sha256": "f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec",
+      "bytes": 46830571
+    },
+    {
+      "model": "efficientnet_b0",
+      "url": "https://download.pytorch.org/models/efficientnet_b0_rwightman-7f5810bc.pth",
+      "sha256": "7f5810bc96def8f7552d5b7e68d53c4786f81167d28291b21c0d90e1fca14934",
+      "bytes": 21444401
+    },
+    {
+      "model": "squeezenet1_1",
+      "url": "https://download.pytorch.org/models/squeezenet1_1-b8a52dc0.pth",
+      "sha256": "b8a52dc049b60e4b6ab68ad0df457362afab8b6304b2febdc1650a5dab4d7e7b",
+      "bytes": 4958839
+    }
+  ],
+  "profiles": [
+    {
+      "model": "mobilenet_v3_small",
+      "device": "cpu",
+      "device_name": "CPU",
+      "torch_version": "2.12.0+cu130",
+      "torchvision_version": "0.27.0+cu130",
+      "torch_cuda_version": "13.0",
+      "input_shape": [
+        3,
+        224,
+        224
+      ],
+      "input_dtype": "float32",
+      "cpu_threads": 2,
+      "weights_sha256": "047dcff4addef86ea5bc2eff13c9614dc11f47ab1160d0a71a25e7db994f4e1f",
+      "parameter_count": 2542856,
+      "parameter_bytes": 10171424,
+      "rows": [
+        {
+          "batch_size": 1,
+          "sample_count": 10,
+          "device_ms": {
+            "mean": 67.1135000004142,
+            "stdev": 2.784644837452138,
+            "p50": 66.9234500019229,
+            "p95": 71.38412499662081,
+            "min": 62.49740000203019,
+            "max": 73.11639999534236
+          },
+          "service_ms": {
+            "mean": 67.91164000169374,
+            "stdev": 2.8232300828548387,
+            "p50": 67.63950000458863,
+            "p95": 72.29155000277387,
+            "min": 63.253600004827604,
+            "max": 73.89310000144178
+          },
+          "sustained_images_per_second": 14.725016211875603,
+          "peak_memory": {
+            "cuda_peak_allocated_bytes": null,
+            "cuda_peak_reserved_bytes": null,
+            "process_peak_resident_bytes": 750993408,
+            "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+            "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+          },
+          "samples": [
+            {
+              "sample": 1,
+              "device_ms": 69.26689999818336,
+              "service_ms": 70.33410000440199
+            },
+            {
+              "sample": 2,
+              "device_ms": 67.72860000637593,
+              "service_ms": 68.44370000180788
+            },
+            {
+              "sample": 3,
+              "device_ms": 65.0372999953106,
+              "service_ms": 65.81790000200272
+            },
+            {
+              "sample": 4,
+              "device_ms": 62.49740000203019,
+              "service_ms": 63.253600004827604
+            },
+            {
+              "sample": 5,
+              "device_ms": 73.11639999534236,
+              "service_ms": 73.89310000144178
+            },
+            {
+              "sample": 6,
+              "device_ms": 66.0000999996555,
+              "service_ms": 66.78649999957997
+            },
+            {
+              "sample": 7,
+              "device_ms": 67.65970000560628,
+              "service_ms": 68.64539999514818
+            },
+            {
+              "sample": 8,
+              "device_ms": 67.26090000302065,
+              "service_ms": 67.9666000069119
+            },
+            {
+              "sample": 9,
+              "device_ms": 66.58600000082515,
+              "service_ms": 67.31240000226535
+            },
+            {
+              "sample": 10,
+              "device_ms": 65.98169999779202,
+              "service_ms": 66.66309999855002
+            }
+          ]
+        },
+        {
+          "batch_size": 4,
+          "sample_count": 10,
+          "device_ms": {
+            "mean": 148.37488000048324,
+            "stdev": 17.950217560455116,
+            "p50": 146.24610000100802,
+            "p95": 176.68507999951544,
+            "min": 129.8049000033643,
+            "max": 181.35050000273623
+          },
+          "service_ms": {
+            "mean": 150.40093999996316,
+            "stdev": 18.566051453421657,
+            "p50": 148.59255000192206,
+            "p95": 179.95941500048502,
+            "min": 131.22529999964172,
+            "max": 184.90010000095936
+          },
+          "sustained_images_per_second": 26.595578458492213,
+          "peak_memory": {
+            "cuda_peak_allocated_bytes": null,
+            "cuda_peak_reserved_bytes": null,
+            "process_peak_resident_bytes": 751833088,
+            "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+            "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+          },
+          "samples": [
+            {
+              "sample": 1,
+              "device_ms": 181.35050000273623,
+              "service_ms": 184.90010000095936
+            },
+            {
+              "sample": 2,
+              "device_ms": 170.98289999557892,
+              "service_ms": 173.92079999990528
+            },
+            {
+              "sample": 3,
+              "device_ms": 157.03229999780888,
+              "service_ms": 158.54489999765065
+            },
+            {
+              "sample": 4,
+              "device_ms": 145.5677000049036,
+              "service_ms": 147.98200000223005
+            },
+            {
+              "sample": 5,
+              "device_ms": 129.93700000515673,
+              "service_ms": 131.5420999962953
+            },
+            {
+              "sample": 6,
+              "device_ms": 129.8049000033643,
+              "service_ms": 131.22529999964172
+            },
+            {
+              "sample": 7,
+              "device_ms": 134.26479999907315,
+              "service_ms": 135.8207000012044
+            },
+            {
+              "sample": 8,
+              "device_ms": 131.8332000009832,
+              "service_ms": 133.18699999945238
+            },
+            {
+              "sample": 9,
+              "device_ms": 146.92449999711243,
+              "service_ms": 149.20310000161408
+            },
+            {
+              "sample": 10,
+              "device_ms": 156.050999998115,
+              "service_ms": 157.68340000067838
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "model": "mobilenet_v3_small",
+      "device": "cuda",
+      "device_name": "NVIDIA GeForce RTX 5060 Laptop GPU",
+      "torch_version": "2.12.0+cu130",
+      "torchvision_version": "0.27.0+cu130",
+      "torch_cuda_version": "13.0",
+      "input_shape": [
+        3,
+        224,
+        224
+      ],
+      "input_dtype": "float32",
+      "cpu_threads": 2,
+      "weights_sha256": "047dcff4addef86ea5bc2eff13c9614dc11f47ab1160d0a71a25e7db994f4e1f",
+      "parameter_count": 2542856,
+      "parameter_bytes": 10171424,
+      "rows": [
+        {
+          "batch_size": 1,
+          "sample_count": 10,
+          "device_ms": {
+            "mean": 49.226423263549805,
+            "stdev": 8.909339028405313,
+            "p50": 46.18937683105469,
+            "p95": 63.61209220886229,
+            "min": 40.74710464477539,
+            "max": 69.75177764892578
+          },
+          "service_ms": {
+            "mean": 51.34658000097261,
+            "stdev": 9.012475497979732,
+            "p50": 48.14670000268961,
+            "p95": 65.8081250017858,
+            "min": 42.862499998591375,
+            "max": 72.16190000326606
+          },
+          "sustained_images_per_second": 19.475493791038428,
+          "peak_memory": {
+            "cuda_peak_allocated_bytes": 46790144,
+            "cuda_peak_reserved_bytes": 62914560,
+            "process_peak_resident_bytes": 1300426752,
+            "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+            "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+          },
+          "samples": [
+            {
+              "sample": 1,
+              "device_ms": 56.1080322265625,
+              "service_ms": 58.042399999976624
+            },
+            {
+              "sample": 2,
+              "device_ms": 54.99603271484375,
+              "service_ms": 57.33350000082282
+            },
+            {
+              "sample": 3,
+              "device_ms": 44.371585845947266,
+              "service_ms": 46.82360000151675
+            },
+            {
+              "sample": 4,
+              "device_ms": 42.00320053100586,
+              "service_ms": 44.091499999922235
+            },
+            {
+              "sample": 5,
+              "device_ms": 42.43964767456055,
+              "service_ms": 44.18040000018664
+            },
+            {
+              "sample": 6,
+              "device_ms": 40.74710464477539,
+              "service_ms": 42.862499998591375
+            },
+            {
+              "sample": 7,
+              "device_ms": 46.537601470947266,
+              "service_ms": 48.30950000177836
+            },
+            {
+              "sample": 8,
+              "device_ms": 69.75177764892578,
+              "service_ms": 72.16190000326606
+            },
+            {
+              "sample": 9,
+              "device_ms": 45.84115219116211,
+              "service_ms": 47.983900003600866
+            },
+            {
+              "sample": 10,
+              "device_ms": 49.46809768676758,
+              "service_ms": 51.676600000064354
+            }
+          ]
+        },
+        {
+          "batch_size": 4,
+          "sample_count": 10,
+          "device_ms": {
+            "mean": 62.34077835083008,
+            "stdev": 41.67431648547614,
+            "p50": 43.8756160736084,
+            "p95": 140.25423011779782,
+            "min": 37.699615478515625,
+            "max": 161.3187255859375
+          },
+          "service_ms": {
+            "mean": 68.61983999988297,
+            "stdev": 45.82894031204671,
+            "p50": 48.35214999911841,
+            "p95": 153.32844500371715,
+            "min": 40.7439999980852,
+            "max": 179.07650000415742
+          },
+          "sustained_images_per_second": 58.29217905501998,
+          "peak_memory": {
+            "cuda_peak_allocated_bytes": 54272512,
+            "cuda_peak_reserved_bytes": 62914560,
+            "process_peak_resident_bytes": 1300434944,
+            "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+            "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+          },
+          "samples": [
+            {
+              "sample": 1,
+              "device_ms": 161.3187255859375,
+              "service_ms": 179.07650000415742
+            },
+            {
+              "sample": 2,
+              "device_ms": 114.50873565673828,
+              "service_ms": 121.85860000317916
+            },
+            {
+              "sample": 3,
+              "device_ms": 56.214176177978516,
+              "service_ms": 66.30969999969238
+            },
+            {
+              "sample": 4,
+              "device_ms": 37.699615478515625,
+              "service_ms": 40.8778999990318
+            },
+            {
+              "sample": 5,
+              "device_ms": 40.345985412597656,
+              "service_ms": 43.72739999962505
+            },
+            {
+              "sample": 6,
+              "device_ms": 40.7020149230957,
+              "service_ms": 43.3712000012747
+            },
+            {
+              "sample": 7,
+              "device_ms": 43.18617630004883,
+              "service_ms": 46.213599998736754
+            },
+            {
+              "sample": 8,
+              "device_ms": 37.93830490112305,
+              "service_ms": 40.7439999980852
+            },
+            {
+              "sample": 9,
+              "device_ms": 44.56505584716797,
+              "service_ms": 53.52879999554716
+            },
+            {
+              "sample": 10,
+              "device_ms": 46.928993225097656,
+              "service_ms": 50.490699999500066
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "model": "resnet18",
+      "device": "cpu",
+      "device_name": "CPU",
+      "torch_version": "2.12.0+cu130",
+      "torchvision_version": "0.27.0+cu130",
+      "torch_cuda_version": "13.0",
+      "input_shape": [
+        3,
+        224,
+        224
+      ],
+      "input_dtype": "float32",
+      "cpu_threads": 2,
+      "weights_sha256": "f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec",
+      "parameter_count": 11689512,
+      "parameter_bytes": 46758048,
+      "rows": [
+        {
+          "batch_size": 1,
+          "sample_count": 10,
+          "device_ms": {
+            "mean": 236.43516000011005,
+            "stdev": 12.219374447556081,
+            "p50": 235.9219000027224,
+            "p95": 254.31014000023424,
+            "min": 220.69649999320973,
+            "max": 260.2108999999473
+          },
+          "service_ms": {
+            "mean": 237.28434999939054,
+            "stdev": 12.243643159550796,
+            "p50": 236.75309999816818,
+            "p95": 255.1261050026369,
+            "min": 221.366499994474,
+            "max": 261.0495000044466
+          },
+          "sustained_images_per_second": 4.214352948277324,
+          "peak_memory": {
+            "cuda_peak_allocated_bytes": null,
+            "cuda_peak_reserved_bytes": null,
+            "process_peak_resident_bytes": 1370722304,
+            "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+            "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+          },
+          "samples": [
+            {
+              "sample": 1,
+              "device_ms": 237.0154000018374,
+              "service_ms": 237.7009999981965
+            },
+            {
+              "sample": 2,
+              "device_ms": 247.09810000058496,
+              "service_ms": 247.88640000042506
+            },
+            {
+              "sample": 3,
+              "device_ms": 260.2108999999473,
+              "service_ms": 261.0495000044466
+            },
+            {
+              "sample": 4,
+              "device_ms": 246.66079999587964,
+              "service_ms": 247.42890000197804
+            },
+            {
+              "sample": 5,
+              "device_ms": 231.77770000620512,
+              "service_ms": 232.64580000250135
+            },
+            {
+              "sample": 6,
+              "device_ms": 235.12400000618072,
+              "service_ms": 235.80519999813987
+            },
+            {
+              "sample": 7,
+              "device_ms": 226.10439999698428,
+              "service_ms": 227.05069999938132
+            },
+            {
+              "sample": 8,
+              "device_ms": 222.94400000100723,
+              "service_ms": 223.64199999719858
+            },
+            {
+              "sample": 9,
+              "device_ms": 220.69649999320973,
+              "service_ms": 221.366499994474
+            },
+            {
+              "sample": 10,
+              "device_ms": 236.71979999926407,
+              "service_ms": 238.26749999716412
+            }
+          ]
+        },
+        {
+          "batch_size": 4,
+          "sample_count": 10,
+          "device_ms": {
+            "mean": 978.6311100004241,
+            "stdev": 189.39554894442077,
+            "p50": 942.6590500006569,
+            "p95": 1284.737815002518,
+            "min": 781.9620000009309,
+            "max": 1316.7055000012624
+          },
+          "service_ms": {
+            "mean": 980.1838400002453,
+            "stdev": 189.46105536912802,
+            "p50": 944.3703500000993,
+            "p95": 1286.3335149988416,
+            "min": 783.3159000001615,
+            "max": 1318.2318999970448
+          },
+          "sustained_images_per_second": 4.080867115702499,
+          "peak_memory": {
+            "cuda_peak_allocated_bytes": null,
+            "cuda_peak_reserved_bytes": null,
+            "process_peak_resident_bytes": 1370722304,
+            "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+            "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+          },
+          "samples": [
+            {
+              "sample": 1,
+              "device_ms": 792.4951999957557,
+              "service_ms": 793.9508999988902
+            },
+            {
+              "sample": 2,
+              "device_ms": 855.4533000060474,
+              "service_ms": 857.049400001415
+            },
+            {
+              "sample": 3,
+              "device_ms": 1051.9083000035607,
+              "service_ms": 1053.3109000025433
+            },
+            {
+              "sample": 4,
+              "device_ms": 781.9620000009309,
+              "service_ms": 783.3159000001615
+            },
+            {
+              "sample": 5,
+              "device_ms": 811.7122999974526,
+              "service_ms": 813.0058000024292
+            },
+            {
+              "sample": 6,
+              "device_ms": 1045.090199993865,
+              "service_ms": 1046.8862999987323
+            },
+            {
+              "sample": 7,
+              "device_ms": 877.4680999995326,
+              "service_ms": 879.1985999996541
+            },
+            {
+              "sample": 8,
+              "device_ms": 1245.6662000040524,
+              "service_ms": 1247.3466000010376
+            },
+            {
+              "sample": 9,
+              "device_ms": 1007.8500000017812,
+              "service_ms": 1009.5421000005445
+            },
+            {
+              "sample": 10,
+              "device_ms": 1316.7055000012624,
+              "service_ms": 1318.2318999970448
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "model": "resnet18",
+      "device": "cuda",
+      "device_name": "NVIDIA GeForce RTX 5060 Laptop GPU",
+      "torch_version": "2.12.0+cu130",
+      "torchvision_version": "0.27.0+cu130",
+      "torch_cuda_version": "13.0",
+      "input_shape": [
+        3,
+        224,
+        224
+      ],
+      "input_dtype": "float32",
+      "cpu_threads": 2,
+      "weights_sha256": "f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec",
+      "parameter_count": 11689512,
+      "parameter_bytes": 46758048,
+      "rows": [
+        {
+          "batch_size": 1,
+          "sample_count": 10,
+          "device_ms": {
+            "mean": 46.698121070861816,
+            "stdev": 13.67011848517273,
+            "p50": 42.70476722717285,
+            "p95": 67.37353420257567,
+            "min": 29.749984741210938,
+            "max": 72.07830047607422
+          },
+          "service_ms": {
+            "mean": 50.550140001723776,
+            "stdev": 13.975692600711525,
+            "p50": 47.83360000146786,
+            "p95": 72.0319250031025,
+            "min": 33.04210000351304,
+            "max": 76.16000000416534
+          },
+          "sustained_images_per_second": 19.782338881077276,
+          "peak_memory": {
+            "cuda_peak_allocated_bytes": 163308544,
+            "cuda_peak_reserved_bytes": 578813952,
+            "process_peak_resident_bytes": 1408446464,
+            "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+            "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+          },
+          "samples": [
+            {
+              "sample": 1,
+              "device_ms": 61.62326431274414,
+              "service_ms": 66.9865000018035
+            },
+            {
+              "sample": 2,
+              "device_ms": 42.0634880065918,
+              "service_ms": 47.693500004243106
+            },
+            {
+              "sample": 3,
+              "device_ms": 50.428001403808594,
+              "service_ms": 54.10890000348445
+            },
+            {
+              "sample": 4,
+              "device_ms": 29.749984741210938,
+              "service_ms": 33.04210000351304
+            },
+            {
+              "sample": 5,
+              "device_ms": 72.07830047607422,
+              "service_ms": 76.16000000416534
+            },
+            {
+              "sample": 6,
+              "device_ms": 39.804256439208984,
+              "service_ms": 42.4020999998902
+            },
+            {
+              "sample": 7,
+              "device_ms": 57.78799819946289,
+              "service_ms": 60.61269999918295
+            },
+            {
+              "sample": 8,
+              "device_ms": 43.346046447753906,
+              "service_ms": 47.97369999869261
+            },
+            {
+              "sample": 9,
+              "device_ms": 30.62291145324707,
+              "service_ms": 34.507800002756994
+            },
+            {
+              "sample": 10,
+              "device_ms": 39.476959228515625,
+              "service_ms": 42.01409999950556
+            }
+          ]
+        },
+        {
+          "batch_size": 4,
+          "sample_count": 10,
+          "device_ms": {
+            "mean": 88.78614082336426,
+            "stdev": 38.35880072457495,
+            "p50": 78.05097579956055,
+            "p95": 152.78645591735835,
+            "min": 51.2973747253418,
+            "max": 175.58245849609375
+          },
+          "service_ms": {
+            "mean": 109.28190999911749,
+            "stdev": 48.04515370692412,
+            "p50": 90.88669999619015,
+            "p95": 181.01343499947683,
+            "min": 57.98000000504544,
+            "max": 207.7216999969096
+          },
+          "sustained_images_per_second": 36.60258134244087,
+          "peak_memory": {
+            "cuda_peak_allocated_bytes": 268078080,
+            "cuda_peak_reserved_bytes": 578813952,
+            "process_peak_resident_bytes": 1408446464,
+            "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+            "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+          },
+          "samples": [
+            {
+              "sample": 1,
+              "device_ms": 63.88435363769531,
+              "service_ms": 70.72939999488881
+            },
+            {
+              "sample": 2,
+              "device_ms": 57.66396713256836,
+              "service_ms": 76.85009999840986
+            },
+            {
+              "sample": 3,
+              "device_ms": 78.4119644165039,
+              "service_ms": 147.20249999663793
+            },
+            {
+              "sample": 4,
+              "device_ms": 77.68998718261719,
+              "service_ms": 87.72779999708291
+            },
+            {
+              "sample": 5,
+              "device_ms": 51.2973747253418,
+              "service_ms": 57.98000000504544
+            },
+            {
+              "sample": 6,
+              "device_ms": 85.25881958007812,
+              "service_ms": 94.04559999529738
+            },
+            {
+              "sample": 7,
+              "device_ms": 62.5332145690918,
+              "service_ms": 68.55340000038268
+            },
+            {
+              "sample": 8,
+              "device_ms": 124.92467498779297,
+              "service_ms": 148.3700000026147
+            },
+            {
+              "sample": 9,
+              "device_ms": 110.61459350585938,
+              "service_ms": 133.6386000039056
+            },
+            {
+              "sample": 10,
+              "device_ms": 175.58245849609375,
+              "service_ms": 207.7216999969096
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "model": "efficientnet_b0",
+      "device": "cpu",
+      "device_name": "CPU",
+      "torch_version": "2.12.0+cu130",
+      "torchvision_version": "0.27.0+cu130",
+      "torch_cuda_version": "13.0",
+      "input_shape": [
+        3,
+        224,
+        224
+      ],
+      "input_dtype": "float32",
+      "cpu_threads": 2,
+      "weights_sha256": "7f5810bc96def8f7552d5b7e68d53c4786f81167d28291b21c0d90e1fca14934",
+      "parameter_count": 5288548,
+      "parameter_bytes": 21154192,
+      "rows": [
+        {
+          "batch_size": 1,
+          "sample_count": 10,
+          "device_ms": {
+            "mean": 286.81816999960574,
+            "stdev": 160.65694866710004,
+            "p50": 221.3905499993416,
+            "p95": 549.6954499983981,
+            "min": 185.7843000034336,
+            "max": 712.5499999965541
+          },
+          "service_ms": {
+            "mean": 287.8786000008404,
+            "stdev": 160.76274014212117,
+            "p50": 222.066199999972,
+            "p95": 550.9298700024369,
+            "min": 186.4274999970803,
+            "max": 713.9592000021366
+          },
+          "sustained_images_per_second": 3.4736864775536658,
+          "peak_memory": {
+            "cuda_peak_allocated_bytes": null,
+            "cuda_peak_reserved_bytes": null,
+            "process_peak_resident_bytes": 1430523904,
+            "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+            "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+          },
+          "samples": [
+            {
+              "sample": 1,
+              "device_ms": 187.06709999969462,
+              "service_ms": 187.80360000528162
+            },
+            {
+              "sample": 2,
+              "device_ms": 185.7843000034336,
+              "service_ms": 186.4274999970803
+            },
+            {
+              "sample": 3,
+              "device_ms": 233.70209999848157,
+              "service_ms": 234.4061999974656
+            },
+            {
+              "sample": 4,
+              "device_ms": 209.07900000020163,
+              "service_ms": 209.72620000247844
+            },
+            {
+              "sample": 5,
+              "device_ms": 247.3312000001897,
+              "service_ms": 248.1108000065433
+            },
+            {
+              "sample": 6,
+              "device_ms": 204.22970000072382,
+              "service_ms": 207.19909999752417
+            },
+            {
+              "sample": 7,
+              "device_ms": 202.0797000004677,
+              "service_ms": 202.79070000106003
+            },
+            {
+              "sample": 8,
+              "device_ms": 335.7075999956578,
+              "service_ms": 336.69089999602875
+            },
+            {
+              "sample": 9,
+              "device_ms": 712.5499999965541,
+              "service_ms": 713.9592000021366
+            },
+            {
+              "sample": 10,
+              "device_ms": 350.65100000065286,
+              "service_ms": 351.67180000280496
+            }
+          ]
+        },
+        {
+          "batch_size": 4,
+          "sample_count": 10,
+          "device_ms": {
+            "mean": 1097.3484600013762,
+            "stdev": 779.5579500145662,
+            "p50": 768.8539500013576,
+            "p95": 2329.5677300000516,
+            "min": 569.3877000012435,
+            "max": 3148.0028000005404
+          },
+          "service_ms": {
+            "mean": 1105.952229999093,
+            "stdev": 782.1736306141453,
+            "p50": 771.3035500019032,
+            "p95": 2358.743014996433,
+            "min": 571.1404999965453,
+            "max": 3150.6796999965445
+          },
+          "sustained_images_per_second": 3.6167927433929763,
+          "peak_memory": {
+            "cuda_peak_allocated_bytes": null,
+            "cuda_peak_reserved_bytes": null,
+            "process_peak_resident_bytes": 1430523904,
+            "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+            "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+          },
+          "samples": [
+            {
+              "sample": 1,
+              "device_ms": 1329.2581999994582,
+              "service_ms": 1390.8203999963007
+            },
+            {
+              "sample": 2,
+              "device_ms": 3148.0028000005404,
+              "service_ms": 3150.6796999965445
+            },
+            {
+              "sample": 3,
+              "device_ms": 1227.9807000013534,
+              "service_ms": 1236.6991000017151
+            },
+            {
+              "sample": 4,
+              "device_ms": 621.1983000030159,
+              "service_ms": 622.5341999961529
+            },
+            {
+              "sample": 5,
+              "device_ms": 790.655800003151,
+              "service_ms": 793.6145000057877
+            },
+            {
+              "sample": 6,
+              "device_ms": 1279.9187999989954,
+              "service_ms": 1282.095599999593
+            },
+            {
+              "sample": 7,
+              "device_ms": 747.0520999995642,
+              "service_ms": 748.9925999980187
+            },
+            {
+              "sample": 8,
+              "device_ms": 569.3877000012435,
+              "service_ms": 571.1404999965453
+            },
+            {
+              "sample": 9,
+              "device_ms": 607.6219000024139,
+              "service_ms": 608.8257000010344
+            },
+            {
+              "sample": 10,
+              "device_ms": 652.4083000040264,
+              "service_ms": 654.1199999992386
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "model": "efficientnet_b0",
+      "device": "cuda",
+      "device_name": "NVIDIA GeForce RTX 5060 Laptop GPU",
+      "torch_version": "2.12.0+cu130",
+      "torchvision_version": "0.27.0+cu130",
+      "torch_cuda_version": "13.0",
+      "input_shape": [
+        3,
+        224,
+        224
+      ],
+      "input_dtype": "float32",
+      "cpu_threads": 2,
+      "weights_sha256": "7f5810bc96def8f7552d5b7e68d53c4786f81167d28291b21c0d90e1fca14934",
+      "parameter_count": 5288548,
+      "parameter_bytes": 21154192,
+      "rows": [
+        {
+          "batch_size": 1,
+          "sample_count": 10,
+          "device_ms": {
+            "mean": 66.30830764770508,
+            "stdev": 6.285178467684168,
+            "p50": 65.72734451293945,
+            "p95": 76.08085556030272,
+            "min": 58.1732177734375,
+            "max": 80.34086608886719
+          },
+          "service_ms": {
+            "mean": 68.3471800010011,
+            "stdev": 6.262882170063516,
+            "p50": 67.87420000182465,
+            "p95": 78.11643000422917,
+            "min": 59.68669999856502,
+            "max": 81.98580000316724
+          },
+          "sustained_images_per_second": 14.631181564262821,
+          "peak_memory": {
+            "cuda_peak_allocated_bytes": 99549696,
+            "cuda_peak_reserved_bytes": 587202560,
+            "process_peak_resident_bytes": 1468563456,
+            "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+            "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+          },
+          "samples": [
+            {
+              "sample": 1,
+              "device_ms": 66.01042938232422,
+              "service_ms": 68.52839999919524
+            },
+            {
+              "sample": 2,
+              "device_ms": 69.13452911376953,
+              "service_ms": 70.92749999719672
+            },
+            {
+              "sample": 3,
+              "device_ms": 60.680992126464844,
+              "service_ms": 62.74489999486832
+            },
+            {
+              "sample": 4,
+              "device_ms": 63.102176666259766,
+              "service_ms": 66.34560000384226
+            },
+            {
+              "sample": 5,
+              "device_ms": 70.87417602539062,
+              "service_ms": 73.38720000552712
+            },
+            {
+              "sample": 6,
+              "device_ms": 67.43583679199219,
+              "service_ms": 69.06570000137435
+            },
+            {
+              "sample": 7,
+              "device_ms": 61.886592864990234,
+              "service_ms": 63.580000001820736
+            },
+            {
+              "sample": 8,
+              "device_ms": 65.44425964355469,
+              "service_ms": 67.22000000445405
+            },
+            {
+              "sample": 9,
+              "device_ms": 58.1732177734375,
+              "service_ms": 59.68669999856502
+            },
+            {
+              "sample": 10,
+              "device_ms": 80.34086608886719,
+              "service_ms": 81.98580000316724
+            }
+          ]
+        },
+        {
+          "batch_size": 4,
+          "sample_count": 10,
+          "device_ms": {
+            "mean": 94.27902336120606,
+            "stdev": 34.85405698505579,
+            "p50": 87.24736022949219,
+            "p95": 148.77271347045894,
+            "min": 60.02841567993164,
+            "max": 173.2922821044922
+          },
+          "service_ms": {
+            "mean": 100.32398999974248,
+            "stdev": 38.6838219437485,
+            "p50": 94.42374999707681,
+            "p95": 162.27600500278635,
+            "min": 62.62040000001434,
+            "max": 189.1334000029019
+          },
+          "sustained_images_per_second": 39.870822522212954,
+          "peak_memory": {
+            "cuda_peak_allocated_bytes": 132665856,
+            "cuda_peak_reserved_bytes": 587202560,
+            "process_peak_resident_bytes": 1468563456,
+            "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+            "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+          },
+          "samples": [
+            {
+              "sample": 1,
+              "device_ms": 96.96543884277344,
+              "service_ms": 103.0622999969637
+            },
+            {
+              "sample": 2,
+              "device_ms": 112.51213073730469,
+              "service_ms": 117.00649999693269
+            },
+            {
+              "sample": 3,
+              "device_ms": 173.2922821044922,
+              "service_ms": 189.1334000029019
+            },
+            {
+              "sample": 4,
+              "device_ms": 118.80435180664062,
+              "service_ms": 129.45030000264524
+            },
+            {
+              "sample": 5,
+              "device_ms": 101.3485107421875,
+              "service_ms": 105.30060000019148
+            },
+            {
+              "sample": 6,
+              "device_ms": 69.02569580078125,
+              "service_ms": 71.81950000085635
+            },
+            {
+              "sample": 7,
+              "device_ms": 60.316383361816406,
+              "service_ms": 63.20469999627676
+            },
+            {
+              "sample": 8,
+              "device_ms": 72.96774291992188,
+              "service_ms": 75.85700000345241
+            },
+            {
+              "sample": 9,
+              "device_ms": 77.52928161621094,
+              "service_ms": 85.78519999718992
+            },
+            {
+              "sample": 10,
+              "device_ms": 60.02841567993164,
+              "service_ms": 62.62040000001434
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "model": "squeezenet1_1",
+      "device": "cpu",
+      "device_name": "CPU",
+      "torch_version": "2.12.0+cu130",
+      "torchvision_version": "0.27.0+cu130",
+      "torch_cuda_version": "13.0",
+      "input_shape": [
+        3,
+        224,
+        224
+      ],
+      "input_dtype": "float32",
+      "cpu_threads": 2,
+      "weights_sha256": "b8a52dc049b60e4b6ab68ad0df457362afab8b6304b2febdc1650a5dab4d7e7b",
+      "parameter_count": 1235496,
+      "parameter_bytes": 4941984,
+      "rows": [
+        {
+          "batch_size": 1,
+          "sample_count": 10,
+          "device_ms": {
+            "mean": 149.04805999831297,
+            "stdev": 46.92603837278149,
+            "p50": 134.4207500005723,
+            "p95": 226.25815999890608,
+            "min": 115.65149999660207,
+            "max": 277.1104999992531
+          },
+          "service_ms": {
+            "mean": 149.77215000035358,
+            "stdev": 46.96813194250222,
+            "p50": 135.1294499982032,
+            "p95": 227.0549450007819,
+            "min": 116.27140000200598,
+            "max": 277.93820000078995
+          },
+          "sustained_images_per_second": 6.6768087391256605,
+          "peak_memory": {
+            "cuda_peak_allocated_bytes": null,
+            "cuda_peak_reserved_bytes": null,
+            "process_peak_resident_bytes": 1469358080,
+            "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+            "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+          },
+          "samples": [
+            {
+              "sample": 1,
+              "device_ms": 164.10529999848222,
+              "service_ms": 164.86430000077235
+            },
+            {
+              "sample": 2,
+              "device_ms": 131.2381000025198,
+              "service_ms": 132.0622999992338
+            },
+            {
+              "sample": 3,
+              "device_ms": 141.26769999711541,
+              "service_ms": 142.05180000135442
+            },
+            {
+              "sample": 4,
+              "device_ms": 131.09830000030342,
+              "service_ms": 131.81819999590516
+            },
+            {
+              "sample": 5,
+              "device_ms": 143.32399999693735,
+              "service_ms": 144.02010000048904
+            },
+            {
+              "sample": 6,
+              "device_ms": 126.94599999667844,
+              "service_ms": 127.70210000599036
+            },
+            {
+              "sample": 7,
+              "device_ms": 122.13579999661306,
+              "service_ms": 122.79649999982212
+            },
+            {
+              "sample": 8,
+              "device_ms": 115.65149999660207,
+              "service_ms": 116.27140000200598
+            },
+            {
+              "sample": 9,
+              "device_ms": 137.6033999986248,
+              "service_ms": 138.1965999971726
+            },
+            {
+              "sample": 10,
+              "device_ms": 277.1104999992531,
+              "service_ms": 277.93820000078995
+            }
+          ]
+        },
+        {
+          "batch_size": 4,
+          "sample_count": 10,
+          "device_ms": {
+            "mean": 421.76512999940314,
+            "stdev": 45.27156483887827,
+            "p50": 409.1829999961192,
+            "p95": 495.0689399986003,
+            "min": 383.18550000258256,
+            "max": 544.0679999956046
+          },
+          "service_ms": {
+            "mean": 423.7930099989171,
+            "stdev": 45.462715685998766,
+            "p50": 410.6000999963726,
+            "p95": 497.999599999457,
+            "min": 384.35870000103023,
+            "max": 545.7086000023992
+          },
+          "sustained_images_per_second": 9.438570022686832,
+          "peak_memory": {
+            "cuda_peak_allocated_bytes": null,
+            "cuda_peak_reserved_bytes": null,
+            "process_peak_resident_bytes": 1477554176,
+            "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+            "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+          },
+          "samples": [
+            {
+              "sample": 1,
+              "device_ms": 394.6756000004825,
+              "service_ms": 396.04079999844544
+            },
+            {
+              "sample": 2,
+              "device_ms": 383.18550000258256,
+              "service_ms": 384.35870000103023
+            },
+            {
+              "sample": 3,
+              "device_ms": 419.0212999965297,
+              "service_ms": 420.64579999714624
+            },
+            {
+              "sample": 4,
+              "device_ms": 408.77959999488667,
+              "service_ms": 410.4321999984677
+            },
+            {
+              "sample": 5,
+              "device_ms": 417.80390000349144,
+              "service_ms": 422.29539999971166
+            },
+            {
+              "sample": 6,
+              "device_ms": 405.53660000296077,
+              "service_ms": 406.8457999965176
+            },
+            {
+              "sample": 7,
+              "device_ms": 544.0679999956046,
+              "service_ms": 545.7086000023992
+            },
+            {
+              "sample": 8,
+              "device_ms": 435.1812000022619,
+              "service_ms": 439.6885999958613
+            },
+            {
+              "sample": 9,
+              "device_ms": 399.81319999787956,
+              "service_ms": 401.1462000053143
+            },
+            {
+              "sample": 10,
+              "device_ms": 409.5863999973517,
+              "service_ms": 410.7679999942775
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "model": "squeezenet1_1",
+      "device": "cuda",
+      "device_name": "NVIDIA GeForce RTX 5060 Laptop GPU",
+      "torch_version": "2.12.0+cu130",
+      "torchvision_version": "0.27.0+cu130",
+      "torch_cuda_version": "13.0",
+      "input_shape": [
+        3,
+        224,
+        224
+      ],
+      "input_dtype": "float32",
+      "cpu_threads": 2,
+      "weights_sha256": "b8a52dc049b60e4b6ab68ad0df457362afab8b6304b2febdc1650a5dab4d7e7b",
+      "parameter_count": 1235496,
+      "parameter_bytes": 4941984,
+      "rows": [
+        {
+          "batch_size": 1,
+          "sample_count": 10,
+          "device_ms": {
+            "mean": 17.272281551361083,
+            "stdev": 1.764942880869671,
+            "p50": 16.870512008666992,
+            "p95": 20.279243755340573,
+            "min": 15.488096237182617,
+            "max": 20.706880569458008
+          },
+          "service_ms": {
+            "mean": 19.059669999114703,
+            "stdev": 1.8821903729524898,
+            "p50": 18.729149996943306,
+            "p95": 22.217004999765777,
+            "min": 17.058899997209664,
+            "max": 22.950099999434315
+          },
+          "sustained_images_per_second": 52.466805566226945,
+          "peak_memory": {
+            "cuda_peak_allocated_bytes": 93168640,
+            "cuda_peak_reserved_bytes": 587202560,
+            "process_peak_resident_bytes": 1479200768,
+            "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+            "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+          },
+          "samples": [
+            {
+              "sample": 1,
+              "device_ms": 18.02956771850586,
+              "service_ms": 19.719300005817786
+            },
+            {
+              "sample": 2,
+              "device_ms": 16.1560001373291,
+              "service_ms": 18.069600002490915
+            },
+            {
+              "sample": 3,
+              "device_ms": 20.706880569458008,
+              "service_ms": 22.950099999434315
+            },
+            {
+              "sample": 4,
+              "device_ms": 15.488096237182617,
+              "service_ms": 17.09349999873666
+            },
+            {
+              "sample": 5,
+              "device_ms": 19.756576538085938,
+              "service_ms": 21.321000000170898
+            },
+            {
+              "sample": 6,
+              "device_ms": 17.311647415161133,
+              "service_ms": 19.089399997028522
+            },
+            {
+              "sample": 7,
+              "device_ms": 16.708799362182617,
+              "service_ms": 18.36889999685809
+            },
+            {
+              "sample": 8,
+              "device_ms": 17.032224655151367,
+              "service_ms": 19.224699994083494
+            },
+            {
+              "sample": 9,
+              "device_ms": 15.490143775939941,
+              "service_ms": 17.058899997209664
+            },
+            {
+              "sample": 10,
+              "device_ms": 16.042879104614258,
+              "service_ms": 17.70129999931669
+            }
+          ]
+        },
+        {
+          "batch_size": 4,
+          "sample_count": 10,
+          "device_ms": {
+            "mean": 19.029977798461914,
+            "stdev": 2.6281984555366886,
+            "p50": 18.705248832702637,
+            "p95": 22.8516222000122,
+            "min": 15.396032333374023,
+            "max": 25.2587833404541
+          },
+          "service_ms": {
+            "mean": 22.514070000033826,
+            "stdev": 2.953992783515576,
+            "p50": 22.733399997378,
+            "p95": 26.607360001435147,
+            "min": 17.842100001871586,
+            "max": 29.029800003627315
+          },
+          "sustained_images_per_second": 177.66667688223365,
+          "peak_memory": {
+            "cuda_peak_allocated_bytes": 99686400,
+            "cuda_peak_reserved_bytes": 587202560,
+            "process_peak_resident_bytes": 1479200768,
+            "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+            "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+          },
+          "samples": [
+            {
+              "sample": 1,
+              "device_ms": 19.909536361694336,
+              "service_ms": 22.96589999605203
+            },
+            {
+              "sample": 2,
+              "device_ms": 19.800479888916016,
+              "service_ms": 23.646599998755846
+            },
+            {
+              "sample": 3,
+              "device_ms": 19.0020809173584,
+              "service_ms": 23.042699998768512
+            },
+            {
+              "sample": 4,
+              "device_ms": 19.5831356048584,
+              "service_ms": 22.50089999870397
+            },
+            {
+              "sample": 5,
+              "device_ms": 18.408416748046875,
+              "service_ms": 22.137400002975482
+            },
+            {
+              "sample": 6,
+              "device_ms": 18.176576614379883,
+              "service_ms": 21.024699999543373
+            },
+            {
+              "sample": 7,
+              "device_ms": 25.2587833404541,
+              "service_ms": 29.029800003627315
+            },
+            {
+              "sample": 8,
+              "device_ms": 18.368608474731445,
+              "service_ms": 23.471299995435402
+            },
+            {
+              "sample": 9,
+              "device_ms": 15.396032333374023,
+              "service_ms": 17.842100001871586
+            },
+            {
+              "sample": 10,
+              "device_ms": 16.396127700805664,
+              "service_ms": 19.479300004604738
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "replays": [
+    {
+      "model": "mobilenet_v3_small",
+      "device": "cpu",
+      "repeat": 0,
+      "policy": "fifo",
+      "schedule_hash": "3d8dc21b4f62a5417cfdc1bb89379056ee2339c9d8725e737a7fa0578a45fa5a",
+      "summary": {
+        "submitted": 57,
+        "admitted": 57,
+        "completed_on_time": 13,
+        "completed_late": 6,
+        "expired": 38,
+        "rejected": 0,
+        "failed": 0,
+        "cancelled_queued": 0,
+        "cancelled_in_flight": 0,
+        "completed": 19,
+        "planned": 57,
+        "unsubmitted_cancelled": 0,
+        "elapsed_s": 1.6360929000002216,
+        "throughput_rps": 11.613032487334568,
+        "completion_rate": 0.3333333333333333,
+        "deadline_success_fraction": 0.22807017543859648,
+        "discarded": 38,
+        "latency_ms": {
+          "p50": 819.8321584641235,
+          "p95": 1083.1327266903825,
+          "p99": 1131.4172003004933
+        },
+        "latency_sample_count": 19,
+        "mean_batch_size": 1.0,
+        "generator_lateness_ms": {
+          "p95": 14.42959367414005,
+          "max": 17.207521974341944
+        },
+        "peak_queue_depth": 50,
+        "peak_memory": {
+          "cuda_peak_allocated_bytes": null,
+          "cuda_peak_reserved_bytes": null,
+          "process_peak_resident_bytes": 777863168,
+          "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+          "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+        }
+      }
+    },
+    {
+      "model": "mobilenet_v3_small",
+      "device": "cpu",
+      "repeat": 0,
+      "policy": "deadline",
+      "schedule_hash": "3d8dc21b4f62a5417cfdc1bb89379056ee2339c9d8725e737a7fa0578a45fa5a",
+      "summary": {
+        "submitted": 57,
+        "admitted": 57,
+        "completed_on_time": 34,
+        "completed_late": 6,
+        "expired": 17,
+        "rejected": 0,
+        "failed": 0,
+        "cancelled_queued": 0,
+        "cancelled_in_flight": 0,
+        "completed": 40,
+        "planned": 57,
+        "unsubmitted_cancelled": 0,
+        "elapsed_s": 1.4759888000044157,
+        "throughput_rps": 27.100476643102123,
+        "completion_rate": 0.7017543859649122,
+        "deadline_success_fraction": 0.5964912280701754,
+        "discarded": 17,
+        "latency_ms": {
+          "p50": 719.9395790848939,
+          "p95": 1082.1234670285776,
+          "p99": 1119.096456260595
+        },
+        "latency_sample_count": 40,
+        "mean_batch_size": 4.0,
+        "generator_lateness_ms": {
+          "p95": 13.34559049573727,
+          "max": 15.629915178578813
+        },
+        "peak_queue_depth": 43,
+        "peak_memory": {
+          "cuda_peak_allocated_bytes": null,
+          "cuda_peak_reserved_bytes": null,
+          "process_peak_resident_bytes": 780206080,
+          "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+          "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+        }
+      }
+    },
+    {
+      "model": "mobilenet_v3_small",
+      "device": "cpu",
+      "repeat": 1,
+      "policy": "deadline",
+      "schedule_hash": "f32898acfe5a6f79e93d5b6fec3e474b0e6528692e35aa50d699d051aebeab1a",
+      "summary": {
+        "submitted": 57,
+        "admitted": 57,
+        "completed_on_time": 7,
+        "completed_late": 7,
+        "expired": 43,
+        "rejected": 0,
+        "failed": 0,
+        "cancelled_queued": 0,
+        "cancelled_in_flight": 0,
+        "completed": 14,
+        "planned": 57,
+        "unsubmitted_cancelled": 0,
+        "elapsed_s": 1.7614491000058479,
+        "throughput_rps": 7.948001449461992,
+        "completion_rate": 0.24561403508771928,
+        "deadline_success_fraction": 0.12280701754385964,
+        "discarded": 43,
+        "latency_ms": {
+          "p50": 1076.4488750646706,
+          "p95": 1403.4378957181616,
+          "p99": 1403.5910104262439
+        },
+        "latency_sample_count": 14,
+        "mean_batch_size": 3.5,
+        "generator_lateness_ms": {
+          "p95": 14.321491726150269,
+          "max": 15.925371291814372
+        },
+        "peak_queue_depth": 50,
+        "peak_memory": {
+          "cuda_peak_allocated_bytes": null,
+          "cuda_peak_reserved_bytes": null,
+          "process_peak_resident_bytes": 782061568,
+          "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+          "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+        }
+      }
+    },
+    {
+      "model": "mobilenet_v3_small",
+      "device": "cpu",
+      "repeat": 1,
+      "policy": "fifo",
+      "schedule_hash": "f32898acfe5a6f79e93d5b6fec3e474b0e6528692e35aa50d699d051aebeab1a",
+      "summary": {
+        "submitted": 57,
+        "admitted": 57,
+        "completed_on_time": 13,
+        "completed_late": 4,
+        "expired": 40,
+        "rejected": 0,
+        "failed": 0,
+        "cancelled_queued": 0,
+        "cancelled_in_flight": 0,
+        "completed": 17,
+        "planned": 57,
+        "unsubmitted_cancelled": 0,
+        "elapsed_s": 1.4267377000069246,
+        "throughput_rps": 11.915294591232497,
+        "completion_rate": 0.2982456140350877,
+        "deadline_success_fraction": 0.22807017543859648,
+        "discarded": 40,
+        "latency_ms": {
+          "p50": 663.0257914657705,
+          "p95": 1081.7707762253121,
+          "p99": 1124.2209750125767
+        },
+        "latency_sample_count": 17,
+        "mean_batch_size": 1.0,
+        "generator_lateness_ms": {
+          "p95": 14.285397139610723,
+          "max": 16.306041776260827
+        },
+        "peak_queue_depth": 51,
+        "peak_memory": {
+          "cuda_peak_allocated_bytes": null,
+          "cuda_peak_reserved_bytes": null,
+          "process_peak_resident_bytes": 782061568,
+          "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+          "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+        }
+      }
+    },
+    {
+      "model": "mobilenet_v3_small",
+      "device": "cuda",
+      "repeat": 0,
+      "policy": "fifo",
+      "schedule_hash": "3d8dc21b4f62a5417cfdc1bb89379056ee2339c9d8725e737a7fa0578a45fa5a",
+      "summary": {
+        "submitted": 57,
+        "admitted": 57,
+        "completed_on_time": 28,
+        "completed_late": 4,
+        "expired": 25,
+        "rejected": 0,
+        "failed": 0,
+        "cancelled_queued": 0,
+        "cancelled_in_flight": 0,
+        "completed": 32,
+        "planned": 57,
+        "unsubmitted_cancelled": 0,
+        "elapsed_s": 1.5083548000038718,
+        "throughput_rps": 21.21516767800113,
+        "completion_rate": 0.5614035087719298,
+        "deadline_success_fraction": 0.49122807017543857,
+        "discarded": 25,
+        "latency_ms": {
+          "p50": 741.2742210253782,
+          "p95": 1040.2637531544315,
+          "p99": 1048.0670769258722
+        },
+        "latency_sample_count": 32,
+        "mean_batch_size": 1.0,
+        "generator_lateness_ms": {
+          "p95": 15.77468595060054,
+          "max": 16.193467774428427
+        },
+        "peak_queue_depth": 46,
+        "peak_memory": {
+          "cuda_peak_allocated_bytes": 46790144,
+          "cuda_peak_reserved_bytes": 62914560,
+          "process_peak_resident_bytes": 1287020544,
+          "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+          "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+        }
+      }
+    },
+    {
+      "model": "mobilenet_v3_small",
+      "device": "cuda",
+      "repeat": 0,
+      "policy": "deadline",
+      "schedule_hash": "3d8dc21b4f62a5417cfdc1bb89379056ee2339c9d8725e737a7fa0578a45fa5a",
+      "summary": {
+        "submitted": 57,
+        "admitted": 57,
+        "completed_on_time": 57,
+        "completed_late": 0,
+        "expired": 0,
+        "rejected": 0,
+        "failed": 0,
+        "cancelled_queued": 0,
+        "cancelled_in_flight": 0,
+        "completed": 57,
+        "planned": 57,
+        "unsubmitted_cancelled": 0,
+        "elapsed_s": 0.6524447000047076,
+        "throughput_rps": 87.36372599791021,
+        "completion_rate": 1.0,
+        "deadline_success_fraction": 1.0,
+        "discarded": 0,
+        "latency_ms": {
+          "p50": 223.09712618152844,
+          "p95": 370.2166702234535,
+          "p99": 388.80123411741806
+        },
+        "latency_sample_count": 57,
+        "mean_batch_size": 3.8,
+        "generator_lateness_ms": {
+          "p95": 15.218190482119097,
+          "max": 16.1736700028996
+        },
+        "peak_queue_depth": 35,
+        "peak_memory": {
+          "cuda_peak_allocated_bytes": 54272512,
+          "cuda_peak_reserved_bytes": 62914560,
+          "process_peak_resident_bytes": 1288839168,
+          "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+          "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+        }
+      }
+    },
+    {
+      "model": "mobilenet_v3_small",
+      "device": "cuda",
+      "repeat": 1,
+      "policy": "deadline",
+      "schedule_hash": "f32898acfe5a6f79e93d5b6fec3e474b0e6528692e35aa50d699d051aebeab1a",
+      "summary": {
+        "submitted": 57,
+        "admitted": 57,
+        "completed_on_time": 57,
+        "completed_late": 0,
+        "expired": 0,
+        "rejected": 0,
+        "failed": 0,
+        "cancelled_queued": 0,
+        "cancelled_in_flight": 0,
+        "completed": 57,
+        "planned": 57,
+        "unsubmitted_cancelled": 0,
+        "elapsed_s": 0.6432567000010749,
+        "throughput_rps": 88.61159160861402,
+        "completion_rate": 1.0,
+        "deadline_success_fraction": 1.0,
+        "discarded": 0,
+        "latency_ms": {
+          "p50": 256.17992337356554,
+          "p95": 381.9082876012544,
+          "p99": 404.6947164661833
+        },
+        "latency_sample_count": 57,
+        "mean_batch_size": 3.8,
+        "generator_lateness_ms": {
+          "p95": 14.834905690804586,
+          "max": 17.929193316376768
+        },
+        "peak_queue_depth": 38,
+        "peak_memory": {
+          "cuda_peak_allocated_bytes": 54272512,
+          "cuda_peak_reserved_bytes": 62914560,
+          "process_peak_resident_bytes": 1314762752,
+          "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+          "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+        }
+      }
+    },
+    {
+      "model": "mobilenet_v3_small",
+      "device": "cuda",
+      "repeat": 1,
+      "policy": "fifo",
+      "schedule_hash": "f32898acfe5a6f79e93d5b6fec3e474b0e6528692e35aa50d699d051aebeab1a",
+      "summary": {
+        "submitted": 57,
+        "admitted": 57,
+        "completed_on_time": 33,
+        "completed_late": 4,
+        "expired": 20,
+        "rejected": 0,
+        "failed": 0,
+        "cancelled_queued": 0,
+        "cancelled_in_flight": 0,
+        "completed": 37,
+        "planned": 57,
+        "unsubmitted_cancelled": 0,
+        "elapsed_s": 1.3871540000036475,
+        "throughput_rps": 26.673318175128866,
+        "completion_rate": 0.6491228070175439,
+        "deadline_success_fraction": 0.5789473684210527,
+        "discarded": 20,
+        "latency_ms": {
+          "p50": 643.7391892250162,
+          "p95": 1026.1623633181443,
+          "p99": 1037.302606322919
+        },
+        "latency_sample_count": 37,
+        "mean_batch_size": 1.0,
+        "generator_lateness_ms": {
+          "p95": 13.745416961319275,
+          "max": 15.007541769591626
+        },
+        "peak_queue_depth": 47,
+        "peak_memory": {
+          "cuda_peak_allocated_bytes": 46790144,
+          "cuda_peak_reserved_bytes": 62914560,
+          "process_peak_resident_bytes": 1314762752,
+          "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+          "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+        }
+      }
+    },
+    {
+      "model": "resnet18",
+      "device": "cpu",
+      "repeat": 0,
+      "policy": "fifo",
+      "schedule_hash": "3d8dc21b4f62a5417cfdc1bb89379056ee2339c9d8725e737a7fa0578a45fa5a",
+      "summary": {
+        "submitted": 57,
+        "admitted": 57,
+        "completed_on_time": 4,
+        "completed_late": 3,
+        "expired": 50,
+        "rejected": 0,
+        "failed": 0,
+        "cancelled_queued": 0,
+        "cancelled_in_flight": 0,
+        "completed": 7,
+        "planned": 57,
+        "unsubmitted_cancelled": 0,
+        "elapsed_s": 1.6476848000020254,
+        "throughput_rps": 4.248385370788998,
+        "completion_rate": 0.12280701754385964,
+        "deadline_success_fraction": 0.07017543859649122,
+        "discarded": 50,
+        "latency_ms": {
+          "p50": 928.4618023157236,
+          "p95": 1220.2438225744118,
+          "p99": 1230.916658735514
+        },
+        "latency_sample_count": 7,
+        "mean_batch_size": 1.0,
+        "generator_lateness_ms": {
+          "p95": 13.461864268174393,
+          "max": 14.166120563459117
+        },
+        "peak_queue_depth": 54,
+        "peak_memory": {
+          "cuda_peak_allocated_bytes": null,
+          "cuda_peak_reserved_bytes": null,
+          "process_peak_resident_bytes": 1411883008,
+          "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+          "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+        }
+      }
+    },
+    {
+      "model": "resnet18",
+      "device": "cpu",
+      "repeat": 0,
+      "policy": "deadline",
+      "schedule_hash": "3d8dc21b4f62a5417cfdc1bb89379056ee2339c9d8725e737a7fa0578a45fa5a",
+      "summary": {
+        "submitted": 57,
+        "admitted": 57,
+        "completed_on_time": 4,
+        "completed_late": 4,
+        "expired": 49,
+        "rejected": 0,
+        "failed": 0,
+        "cancelled_queued": 0,
+        "cancelled_in_flight": 0,
+        "completed": 8,
+        "planned": 57,
+        "unsubmitted_cancelled": 0,
+        "elapsed_s": 1.6466405000028317,
+        "throughput_rps": 4.858376798084489,
+        "completion_rate": 0.14035087719298245,
+        "deadline_success_fraction": 0.07017543859649122,
+        "discarded": 49,
+        "latency_ms": {
+          "p50": 1234.0824272978352,
+          "p95": 1622.6221090160834,
+          "p99": 1622.6756123996165
+        },
+        "latency_sample_count": 8,
+        "mean_batch_size": 4.0,
+        "generator_lateness_ms": {
+          "p95": 14.394060007180082,
+          "max": 18.047913552436512
+        },
+        "peak_queue_depth": 53,
+        "peak_memory": {
+          "cuda_peak_allocated_bytes": null,
+          "cuda_peak_reserved_bytes": null,
+          "process_peak_resident_bytes": 1411883008,
+          "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+          "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+        }
+      }
+    },
+    {
+      "model": "resnet18",
+      "device": "cpu",
+      "repeat": 1,
+      "policy": "deadline",
+      "schedule_hash": "f32898acfe5a6f79e93d5b6fec3e474b0e6528692e35aa50d699d051aebeab1a",
+      "summary": {
+        "submitted": 57,
+        "admitted": 57,
+        "completed_on_time": 3,
+        "completed_late": 4,
+        "expired": 50,
+        "rejected": 0,
+        "failed": 0,
+        "cancelled_queued": 0,
+        "cancelled_in_flight": 0,
+        "completed": 7,
+        "planned": 57,
+        "unsubmitted_cancelled": 0,
+        "elapsed_s": 1.4778349000043818,
+        "throughput_rps": 4.736659013790542,
+        "completion_rate": 0.12280701754385964,
+        "deadline_success_fraction": 0.05263157894736842,
+        "discarded": 50,
+        "latency_ms": {
+          "p50": 1454.8115852667252,
+          "p95": 1462.151938011084,
+          "p99": 1462.7663500742347
+        },
+        "latency_sample_count": 7,
+        "mean_batch_size": 3.5,
+        "generator_lateness_ms": {
+          "p95": 15.740390069549901,
+          "max": 16.522417805390432
+        },
+        "peak_queue_depth": 54,
+        "peak_memory": {
+          "cuda_peak_allocated_bytes": null,
+          "cuda_peak_reserved_bytes": null,
+          "process_peak_resident_bytes": 1421295616,
+          "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+          "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+        }
+      }
+    },
+    {
+      "model": "resnet18",
+      "device": "cpu",
+      "repeat": 1,
+      "policy": "fifo",
+      "schedule_hash": "f32898acfe5a6f79e93d5b6fec3e474b0e6528692e35aa50d699d051aebeab1a",
+      "summary": {
+        "submitted": 57,
+        "admitted": 57,
+        "completed_on_time": 0,
+        "completed_late": 1,
+        "expired": 56,
+        "rejected": 0,
+        "failed": 0,
+        "cancelled_queued": 0,
+        "cancelled_in_flight": 0,
+        "completed": 1,
+        "planned": 57,
+        "unsubmitted_cancelled": 0,
+        "elapsed_s": 1.4539443000030587,
+        "throughput_rps": 0.6877842569332926,
+        "completion_rate": 0.017543859649122806,
+        "deadline_success_fraction": 0.0,
+        "discarded": 56,
+        "latency_ms": {
+          "p50": 1438.8108210769133,
+          "p95": 1438.8108210769133,
+          "p99": 1438.8108210769133
+        },
+        "latency_sample_count": 1,
+        "mean_batch_size": 1.0,
+        "generator_lateness_ms": {
+          "p95": 23.527505007223223,
+          "max": 26.381215480796527
+        },
+        "peak_queue_depth": 56,
+        "peak_memory": {
+          "cuda_peak_allocated_bytes": null,
+          "cuda_peak_reserved_bytes": null,
+          "process_peak_resident_bytes": 1421295616,
+          "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+          "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+        }
+      }
+    },
+    {
+      "model": "resnet18",
+      "device": "cuda",
+      "repeat": 0,
+      "policy": "fifo",
+      "schedule_hash": "3d8dc21b4f62a5417cfdc1bb89379056ee2339c9d8725e737a7fa0578a45fa5a",
+      "summary": {
+        "submitted": 57,
+        "admitted": 57,
+        "completed_on_time": 19,
+        "completed_late": 5,
+        "expired": 33,
+        "rejected": 0,
+        "failed": 0,
+        "cancelled_queued": 0,
+        "cancelled_in_flight": 0,
+        "completed": 24,
+        "planned": 57,
+        "unsubmitted_cancelled": 0,
+        "elapsed_s": 1.6123566000096616,
+        "throughput_rps": 14.88504466062668,
+        "completion_rate": 0.42105263157894735,
+        "deadline_success_fraction": 0.3333333333333333,
+        "discarded": 33,
+        "latency_ms": {
+          "p50": 808.4734640760871,
+          "p95": 1071.1223638161755,
+          "p99": 1074.1791050466418
+        },
+        "latency_sample_count": 24,
+        "mean_batch_size": 1.0,
+        "generator_lateness_ms": {
+          "p95": 13.239621761022136,
+          "max": 15.396118709759321
+        },
+        "peak_queue_depth": 48,
+        "peak_memory": {
+          "cuda_peak_allocated_bytes": 129754112,
+          "cuda_peak_reserved_bytes": 545259520,
+          "process_peak_resident_bytes": 1424211968,
+          "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+          "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+        }
+      }
+    },
+    {
+      "model": "resnet18",
+      "device": "cuda",
+      "repeat": 0,
+      "policy": "deadline",
+      "schedule_hash": "3d8dc21b4f62a5417cfdc1bb89379056ee2339c9d8725e737a7fa0578a45fa5a",
+      "summary": {
+        "submitted": 57,
+        "admitted": 57,
+        "completed_on_time": 57,
+        "completed_late": 0,
+        "expired": 0,
+        "rejected": 0,
+        "failed": 0,
+        "cancelled_queued": 0,
+        "cancelled_in_flight": 0,
+        "completed": 57,
+        "planned": 57,
+        "unsubmitted_cancelled": 0,
+        "elapsed_s": 0.6108487000019522,
+        "throughput_rps": 93.31279578694009,
+        "completion_rate": 1.0,
+        "deadline_success_fraction": 1.0,
+        "discarded": 0,
+        "latency_ms": {
+          "p50": 268.8706187036587,
+          "p95": 329.64876868791174,
+          "p99": 340.53745207289467
+        },
+        "latency_sample_count": 57,
+        "mean_batch_size": 3.8,
+        "generator_lateness_ms": {
+          "p95": 13.932878916966729,
+          "max": 27.12974979658611
+        },
+        "peak_queue_depth": 33,
+        "peak_memory": {
+          "cuda_peak_allocated_bytes": 234523648,
+          "cuda_peak_reserved_bytes": 545259520,
+          "process_peak_resident_bytes": 1424211968,
+          "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+          "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+        }
+      }
+    },
+    {
+      "model": "resnet18",
+      "device": "cuda",
+      "repeat": 1,
+      "policy": "deadline",
+      "schedule_hash": "f32898acfe5a6f79e93d5b6fec3e474b0e6528692e35aa50d699d051aebeab1a",
+      "summary": {
+        "submitted": 57,
+        "admitted": 57,
+        "completed_on_time": 57,
+        "completed_late": 0,
+        "expired": 0,
+        "rejected": 0,
+        "failed": 0,
+        "cancelled_queued": 0,
+        "cancelled_in_flight": 0,
+        "completed": 57,
+        "planned": 57,
+        "unsubmitted_cancelled": 0,
+        "elapsed_s": 0.6,
+        "throughput_rps": 95.0,
+        "completion_rate": 1.0,
+        "deadline_success_fraction": 1.0,
+        "discarded": 0,
+        "latency_ms": {
+          "p50": 57.30179717647843,
+          "p95": 114.75770081160589,
+          "p99": 118.9007466332987
+        },
+        "latency_sample_count": 57,
+        "mean_batch_size": 3.3529411764705883,
+        "generator_lateness_ms": {
+          "p95": 13.028280342405196,
+          "max": 15.123879711609334
+        },
+        "peak_queue_depth": 19,
+        "peak_memory": {
+          "cuda_peak_allocated_bytes": 234523648,
+          "cuda_peak_reserved_bytes": 545259520,
+          "process_peak_resident_bytes": 1437106176,
+          "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+          "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+        }
+      }
+    },
+    {
+      "model": "resnet18",
+      "device": "cuda",
+      "repeat": 1,
+      "policy": "fifo",
+      "schedule_hash": "f32898acfe5a6f79e93d5b6fec3e474b0e6528692e35aa50d699d051aebeab1a",
+      "summary": {
+        "submitted": 57,
+        "admitted": 57,
+        "completed_on_time": 57,
+        "completed_late": 0,
+        "expired": 0,
+        "rejected": 0,
+        "failed": 0,
+        "cancelled_queued": 0,
+        "cancelled_in_flight": 0,
+        "completed": 57,
+        "planned": 57,
+        "unsubmitted_cancelled": 0,
+        "elapsed_s": 0.6,
+        "throughput_rps": 95.0,
+        "completion_rate": 1.0,
+        "deadline_success_fraction": 1.0,
+        "discarded": 0,
+        "latency_ms": {
+          "p50": 129.20988896803465,
+          "p95": 203.60078423400407,
+          "p99": 211.96784919389756
+        },
+        "latency_sample_count": 57,
+        "mean_batch_size": 1.0,
+        "generator_lateness_ms": {
+          "p95": 14.40385820897063,
+          "max": 16.696815480827354
+        },
+        "peak_queue_depth": 31,
+        "peak_memory": {
+          "cuda_peak_allocated_bytes": 129754112,
+          "cuda_peak_reserved_bytes": 545259520,
+          "process_peak_resident_bytes": 1437106176,
+          "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+          "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+        }
+      }
+    },
+    {
+      "model": "efficientnet_b0",
+      "device": "cpu",
+      "repeat": 0,
+      "policy": "fifo",
+      "schedule_hash": "3d8dc21b4f62a5417cfdc1bb89379056ee2339c9d8725e737a7fa0578a45fa5a",
+      "summary": {
+        "submitted": 57,
+        "admitted": 57,
+        "completed_on_time": 39,
+        "completed_late": 4,
+        "expired": 14,
+        "rejected": 0,
+        "failed": 0,
+        "cancelled_queued": 0,
+        "cancelled_in_flight": 0,
+        "completed": 43,
+        "planned": 57,
+        "unsubmitted_cancelled": 0,
+        "elapsed_s": 1.4864312000063364,
+        "throughput_rps": 28.928348651331255,
+        "completion_rate": 0.7543859649122807,
+        "deadline_success_fraction": 0.6842105263157895,
+        "discarded": 14,
+        "latency_ms": {
+          "p50": 683.4326187017723,
+          "p95": 1020.6186645809794,
+          "p99": 1028.2201125069696
+        },
+        "latency_sample_count": 43,
+        "mean_batch_size": 1.0,
+        "generator_lateness_ms": {
+          "p95": 13.036695000482721,
+          "max": 15.073600610776339
+        },
+        "peak_queue_depth": 44,
+        "peak_memory": {
+          "cuda_peak_allocated_bytes": null,
+          "cuda_peak_reserved_bytes": null,
+          "process_peak_resident_bytes": 1470660608,
+          "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+          "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+        }
+      }
+    },
+    {
+      "model": "efficientnet_b0",
+      "device": "cpu",
+      "repeat": 0,
+      "policy": "deadline",
+      "schedule_hash": "3d8dc21b4f62a5417cfdc1bb89379056ee2339c9d8725e737a7fa0578a45fa5a",
+      "summary": {
+        "submitted": 57,
+        "admitted": 57,
+        "completed_on_time": 57,
+        "completed_late": 0,
+        "expired": 0,
+        "rejected": 0,
+        "failed": 0,
+        "cancelled_queued": 0,
+        "cancelled_in_flight": 0,
+        "completed": 57,
+        "planned": 57,
+        "unsubmitted_cancelled": 0,
+        "elapsed_s": 1.3268607999998494,
+        "throughput_rps": 42.958537926515326,
+        "completion_rate": 1.0,
+        "deadline_success_fraction": 1.0,
+        "discarded": 0,
+        "latency_ms": {
+          "p50": 640.65643853246,
+          "p95": 940.7130486331879,
+          "p99": 982.7480341098271
+        },
+        "latency_sample_count": 57,
+        "mean_batch_size": 3.8,
+        "generator_lateness_ms": {
+          "p95": 11.796739858982619,
+          "max": 13.79610231379047
+        },
+        "peak_queue_depth": 42,
+        "peak_memory": {
+          "cuda_peak_allocated_bytes": null,
+          "cuda_peak_reserved_bytes": null,
+          "process_peak_resident_bytes": 1485488128,
+          "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+          "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+        }
+      }
+    },
+    {
+      "model": "efficientnet_b0",
+      "device": "cpu",
+      "repeat": 1,
+      "policy": "deadline",
+      "schedule_hash": "f32898acfe5a6f79e93d5b6fec3e474b0e6528692e35aa50d699d051aebeab1a",
+      "summary": {
+        "submitted": 57,
+        "admitted": 57,
+        "completed_on_time": 15,
+        "completed_late": 5,
+        "expired": 37,
+        "rejected": 0,
+        "failed": 0,
+        "cancelled_queued": 0,
+        "cancelled_in_flight": 0,
+        "completed": 20,
+        "planned": 57,
+        "unsubmitted_cancelled": 0,
+        "elapsed_s": 1.684962400002405,
+        "throughput_rps": 11.869701068683463,
+        "completion_rate": 0.3508771929824561,
+        "deadline_success_fraction": 0.2631578947368421,
+        "discarded": 37,
+        "latency_ms": {
+          "p50": 740.206546299305,
+          "p95": 1612.7522977869376,
+          "p99": 1615.3679134868435
+        },
+        "latency_sample_count": 20,
+        "mean_batch_size": 4.0,
+        "generator_lateness_ms": {
+          "p95": 15.050942936795762,
+          "max": 16.452189098345116
+        },
+        "peak_queue_depth": 49,
+        "peak_memory": {
+          "cuda_peak_allocated_bytes": null,
+          "cuda_peak_reserved_bytes": null,
+          "process_peak_resident_bytes": 1485488128,
+          "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+          "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+        }
+      }
+    },
+    {
+      "model": "efficientnet_b0",
+      "device": "cpu",
+      "repeat": 1,
+      "policy": "fifo",
+      "schedule_hash": "f32898acfe5a6f79e93d5b6fec3e474b0e6528692e35aa50d699d051aebeab1a",
+      "summary": {
+        "submitted": 57,
+        "admitted": 57,
+        "completed_on_time": 3,
+        "completed_late": 2,
+        "expired": 52,
+        "rejected": 0,
+        "failed": 0,
+        "cancelled_queued": 0,
+        "cancelled_in_flight": 0,
+        "completed": 5,
+        "planned": 57,
+        "unsubmitted_cancelled": 0,
+        "elapsed_s": 1.430182900003274,
+        "throughput_rps": 3.4960563435547676,
+        "completion_rate": 0.08771929824561403,
+        "deadline_success_fraction": 0.05263157894736842,
+        "discarded": 52,
+        "latency_ms": {
+          "p50": 868.6592846279382,
+          "p95": 1299.519774390501,
+          "p99": 1349.0315386507427
+        },
+        "latency_sample_count": 5,
+        "mean_batch_size": 1.0,
+        "generator_lateness_ms": {
+          "p95": 14.088943405658938,
+          "max": 15.00409666186897
+        },
+        "peak_queue_depth": 56,
+        "peak_memory": {
+          "cuda_peak_allocated_bytes": null,
+          "cuda_peak_reserved_bytes": null,
+          "process_peak_resident_bytes": 1485488128,
+          "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+          "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+        }
+      }
+    },
+    {
+      "model": "efficientnet_b0",
+      "device": "cuda",
+      "repeat": 0,
+      "policy": "fifo",
+      "schedule_hash": "3d8dc21b4f62a5417cfdc1bb89379056ee2339c9d8725e737a7fa0578a45fa5a",
+      "summary": {
+        "submitted": 57,
+        "admitted": 57,
+        "completed_on_time": 16,
+        "completed_late": 5,
+        "expired": 36,
+        "rejected": 0,
+        "failed": 0,
+        "cancelled_queued": 0,
+        "cancelled_in_flight": 0,
+        "completed": 21,
+        "planned": 57,
+        "unsubmitted_cancelled": 0,
+        "elapsed_s": 1.5858393000016804,
+        "throughput_rps": 13.242199256871581,
+        "completion_rate": 0.3684210526315789,
+        "deadline_success_fraction": 0.2807017543859649,
+        "discarded": 36,
+        "latency_ms": {
+          "p50": 791.2133259305847,
+          "p95": 1073.3517909611692,
+          "p99": 1076.7557724160724
+        },
+        "latency_sample_count": 21,
+        "mean_batch_size": 1.0,
+        "generator_lateness_ms": {
+          "p95": 14.692461586673744,
+          "max": 16.93410061125178
+        },
+        "peak_queue_depth": 49,
+        "peak_memory": {
+          "cuda_peak_allocated_bytes": 65995264,
+          "cuda_peak_reserved_bytes": 553648128,
+          "process_peak_resident_bytes": 1485488128,
+          "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+          "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+        }
+      }
+    },
+    {
+      "model": "efficientnet_b0",
+      "device": "cuda",
+      "repeat": 0,
+      "policy": "deadline",
+      "schedule_hash": "3d8dc21b4f62a5417cfdc1bb89379056ee2339c9d8725e737a7fa0578a45fa5a",
+      "summary": {
+        "submitted": 57,
+        "admitted": 57,
+        "completed_on_time": 57,
+        "completed_late": 0,
+        "expired": 0,
+        "rejected": 0,
+        "failed": 0,
+        "cancelled_queued": 0,
+        "cancelled_in_flight": 0,
+        "completed": 57,
+        "planned": 57,
+        "unsubmitted_cancelled": 0,
+        "elapsed_s": 0.8913149000072735,
+        "throughput_rps": 63.950462400589124,
+        "completion_rate": 1.0,
+        "deadline_success_fraction": 1.0,
+        "discarded": 0,
+        "latency_ms": {
+          "p50": 351.5585219793138,
+          "p95": 555.2007102261995,
+          "p99": 584.9438341154018
+        },
+        "latency_sample_count": 57,
+        "mean_batch_size": 3.8,
+        "generator_lateness_ms": {
+          "p95": 15.613324136938898,
+          "max": 15.929897883324884
+        },
+        "peak_queue_depth": 36,
+        "peak_memory": {
+          "cuda_peak_allocated_bytes": 99111424,
+          "cuda_peak_reserved_bytes": 553648128,
+          "process_peak_resident_bytes": 1485488128,
+          "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+          "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+        }
+      }
+    },
+    {
+      "model": "efficientnet_b0",
+      "device": "cuda",
+      "repeat": 1,
+      "policy": "deadline",
+      "schedule_hash": "f32898acfe5a6f79e93d5b6fec3e474b0e6528692e35aa50d699d051aebeab1a",
+      "summary": {
+        "submitted": 57,
+        "admitted": 57,
+        "completed_on_time": 57,
+        "completed_late": 0,
+        "expired": 0,
+        "rejected": 0,
+        "failed": 0,
+        "cancelled_queued": 0,
+        "cancelled_in_flight": 0,
+        "completed": 57,
+        "planned": 57,
+        "unsubmitted_cancelled": 0,
+        "elapsed_s": 0.8759362000055262,
+        "throughput_rps": 65.0732325021393,
+        "completion_rate": 1.0,
+        "deadline_success_fraction": 1.0,
+        "discarded": 0,
+        "latency_ms": {
+          "p50": 339.73233984579565,
+          "p95": 563.0746876064222,
+          "p99": 601.5092164726229
+        },
+        "latency_sample_count": 57,
+        "mean_batch_size": 3.8,
+        "generator_lateness_ms": {
+          "p95": 15.788933575095141,
+          "max": 16.897553148737643
+        },
+        "peak_queue_depth": 38,
+        "peak_memory": {
+          "cuda_peak_allocated_bytes": 99111424,
+          "cuda_peak_reserved_bytes": 553648128,
+          "process_peak_resident_bytes": 1500266496,
+          "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+          "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+        }
+      }
+    },
+    {
+      "model": "efficientnet_b0",
+      "device": "cuda",
+      "repeat": 1,
+      "policy": "fifo",
+      "schedule_hash": "f32898acfe5a6f79e93d5b6fec3e474b0e6528692e35aa50d699d051aebeab1a",
+      "summary": {
+        "submitted": 57,
+        "admitted": 57,
+        "completed_on_time": 14,
+        "completed_late": 5,
+        "expired": 38,
+        "rejected": 0,
+        "failed": 0,
+        "cancelled_queued": 0,
+        "cancelled_in_flight": 0,
+        "completed": 19,
+        "planned": 57,
+        "unsubmitted_cancelled": 0,
+        "elapsed_s": 1.4169236000016099,
+        "throughput_rps": 13.409332726181152,
+        "completion_rate": 0.3333333333333333,
+        "deadline_success_fraction": 0.24561403508771928,
+        "discarded": 38,
+        "latency_ms": {
+          "p50": 554.341995564755,
+          "p95": 1077.3096057702787,
+          "p99": 1094.7128154023085
+        },
+        "latency_sample_count": 19,
+        "mean_batch_size": 1.0,
+        "generator_lateness_ms": {
+          "p95": 14.388214916107245,
+          "max": 14.743089224793948
+        },
+        "peak_queue_depth": 49,
+        "peak_memory": {
+          "cuda_peak_allocated_bytes": 65995264,
+          "cuda_peak_reserved_bytes": 553648128,
+          "process_peak_resident_bytes": 1500266496,
+          "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+          "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+        }
+      }
+    },
+    {
+      "model": "squeezenet1_1",
+      "device": "cpu",
+      "repeat": 0,
+      "policy": "fifo",
+      "schedule_hash": "3d8dc21b4f62a5417cfdc1bb89379056ee2339c9d8725e737a7fa0578a45fa5a",
+      "summary": {
+        "submitted": 57,
+        "admitted": 57,
+        "completed_on_time": 7,
+        "completed_late": 6,
+        "expired": 44,
+        "rejected": 0,
+        "failed": 0,
+        "cancelled_queued": 0,
+        "cancelled_in_flight": 0,
+        "completed": 13,
+        "planned": 57,
+        "unsubmitted_cancelled": 0,
+        "elapsed_s": 1.7359696999992593,
+        "throughput_rps": 7.4886099682532175,
+        "completion_rate": 0.22807017543859648,
+        "deadline_success_fraction": 0.12280701754385964,
+        "discarded": 44,
+        "latency_ms": {
+          "p50": 919.9834171013208,
+          "p95": 1128.2252683784463,
+          "p99": 1151.3857245424879
+        },
+        "latency_sample_count": 13,
+        "mean_batch_size": 1.0,
+        "generator_lateness_ms": {
+          "p95": 15.48745786421932,
+          "max": 16.64045017241733
+        },
+        "peak_queue_depth": 53,
+        "peak_memory": {
+          "cuda_peak_allocated_bytes": null,
+          "cuda_peak_reserved_bytes": null,
+          "process_peak_resident_bytes": 1500266496,
+          "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+          "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+        }
+      }
+    },
+    {
+      "model": "squeezenet1_1",
+      "device": "cpu",
+      "repeat": 0,
+      "policy": "deadline",
+      "schedule_hash": "3d8dc21b4f62a5417cfdc1bb89379056ee2339c9d8725e737a7fa0578a45fa5a",
+      "summary": {
+        "submitted": 57,
+        "admitted": 57,
+        "completed_on_time": 8,
+        "completed_late": 12,
+        "expired": 37,
+        "rejected": 0,
+        "failed": 0,
+        "cancelled_queued": 0,
+        "cancelled_in_flight": 0,
+        "completed": 20,
+        "planned": 57,
+        "unsubmitted_cancelled": 0,
+        "elapsed_s": 1.8171548000027542,
+        "throughput_rps": 11.006216971701964,
+        "completion_rate": 0.3508771929824561,
+        "deadline_success_fraction": 0.14035087719298245,
+        "discarded": 37,
+        "latency_ms": {
+          "p50": 1040.6625921968953,
+          "p95": 1362.1276772693818,
+          "p99": 1366.8029891372862
+        },
+        "latency_sample_count": 20,
+        "mean_batch_size": 4.0,
+        "generator_lateness_ms": {
+          "p95": 14.393607304373285,
+          "max": 18.04242548678303
+        },
+        "peak_queue_depth": 49,
+        "peak_memory": {
+          "cuda_peak_allocated_bytes": null,
+          "cuda_peak_reserved_bytes": null,
+          "process_peak_resident_bytes": 1500266496,
+          "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+          "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+        }
+      }
+    },
+    {
+      "model": "squeezenet1_1",
+      "device": "cpu",
+      "repeat": 1,
+      "policy": "deadline",
+      "schedule_hash": "f32898acfe5a6f79e93d5b6fec3e474b0e6528692e35aa50d699d051aebeab1a",
+      "summary": {
+        "submitted": 57,
+        "admitted": 57,
+        "completed_on_time": 8,
+        "completed_late": 8,
+        "expired": 41,
+        "rejected": 0,
+        "failed": 0,
+        "cancelled_queued": 0,
+        "cancelled_in_flight": 0,
+        "completed": 16,
+        "planned": 57,
+        "unsubmitted_cancelled": 0,
+        "elapsed_s": 1.472074800003611,
+        "throughput_rps": 10.869012906110989,
+        "completion_rate": 0.2807017543859649,
+        "deadline_success_fraction": 0.14035087719298245,
+        "discarded": 41,
+        "latency_ms": {
+          "p50": 892.8031895738968,
+          "p95": 1360.7115343766054,
+          "p99": 1362.9881647677394
+        },
+        "latency_sample_count": 16,
+        "mean_batch_size": 4.0,
+        "generator_lateness_ms": {
+          "p95": 14.742491708602754,
+          "max": 15.544421075901482
+        },
+        "peak_queue_depth": 52,
+        "peak_memory": {
+          "cuda_peak_allocated_bytes": null,
+          "cuda_peak_reserved_bytes": null,
+          "process_peak_resident_bytes": 1500266496,
+          "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+          "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+        }
+      }
+    },
+    {
+      "model": "squeezenet1_1",
+      "device": "cpu",
+      "repeat": 1,
+      "policy": "fifo",
+      "schedule_hash": "f32898acfe5a6f79e93d5b6fec3e474b0e6528692e35aa50d699d051aebeab1a",
+      "summary": {
+        "submitted": 57,
+        "admitted": 57,
+        "completed_on_time": 5,
+        "completed_late": 3,
+        "expired": 49,
+        "rejected": 0,
+        "failed": 0,
+        "cancelled_queued": 0,
+        "cancelled_in_flight": 0,
+        "completed": 8,
+        "planned": 57,
+        "unsubmitted_cancelled": 0,
+        "elapsed_s": 1.430737800001225,
+        "throughput_rps": 5.591520682540959,
+        "completion_rate": 0.14035087719298245,
+        "deadline_success_fraction": 0.08771929824561403,
+        "discarded": 49,
+        "latency_ms": {
+          "p50": 789.5054279542819,
+          "p95": 1174.3095455407456,
+          "p99": 1199.2277464353538
+        },
+        "latency_sample_count": 8,
+        "mean_batch_size": 1.0,
+        "generator_lateness_ms": {
+          "p95": 13.907757647393737,
+          "max": 15.904741769190878
+        },
+        "peak_queue_depth": 54,
+        "peak_memory": {
+          "cuda_peak_allocated_bytes": null,
+          "cuda_peak_reserved_bytes": null,
+          "process_peak_resident_bytes": 1500266496,
+          "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+          "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+        }
+      }
+    },
+    {
+      "model": "squeezenet1_1",
+      "device": "cuda",
+      "repeat": 0,
+      "policy": "fifo",
+      "schedule_hash": "3d8dc21b4f62a5417cfdc1bb89379056ee2339c9d8725e737a7fa0578a45fa5a",
+      "summary": {
+        "submitted": 57,
+        "admitted": 57,
+        "completed_on_time": 36,
+        "completed_late": 3,
+        "expired": 18,
+        "rejected": 0,
+        "failed": 0,
+        "cancelled_queued": 0,
+        "cancelled_in_flight": 0,
+        "completed": 39,
+        "planned": 57,
+        "unsubmitted_cancelled": 0,
+        "elapsed_s": 1.504901600004814,
+        "throughput_rps": 25.91531565909375,
+        "completion_rate": 0.6842105263157895,
+        "deadline_success_fraction": 0.631578947368421,
+        "discarded": 18,
+        "latency_ms": {
+          "p50": 686.1829261833918,
+          "p95": 1044.7007829527138,
+          "p99": 1066.7204166314332
+        },
+        "latency_sample_count": 39,
+        "mean_batch_size": 1.0,
+        "generator_lateness_ms": {
+          "p95": 18.775978096527968,
+          "max": 22.08820685336832
+        },
+        "peak_queue_depth": 48,
+        "peak_memory": {
+          "cuda_peak_allocated_bytes": 59614208,
+          "cuda_peak_reserved_bytes": 553648128,
+          "process_peak_resident_bytes": 1500266496,
+          "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+          "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+        }
+      }
+    },
+    {
+      "model": "squeezenet1_1",
+      "device": "cuda",
+      "repeat": 0,
+      "policy": "deadline",
+      "schedule_hash": "3d8dc21b4f62a5417cfdc1bb89379056ee2339c9d8725e737a7fa0578a45fa5a",
+      "summary": {
+        "submitted": 57,
+        "admitted": 57,
+        "completed_on_time": 57,
+        "completed_late": 0,
+        "expired": 0,
+        "rejected": 0,
+        "failed": 0,
+        "cancelled_queued": 0,
+        "cancelled_in_flight": 0,
+        "completed": 57,
+        "planned": 57,
+        "unsubmitted_cancelled": 0,
+        "elapsed_s": 1.2493262000061804,
+        "throughput_rps": 45.62459348064422,
+        "completion_rate": 1.0,
+        "deadline_success_fraction": 1.0,
+        "discarded": 0,
+        "latency_ms": {
+          "p50": 434.37411355262157,
+          "p95": 712.6988206946405,
+          "p99": 799.4071520728176
+        },
+        "latency_sample_count": 57,
+        "mean_batch_size": 3.8,
+        "generator_lateness_ms": {
+          "p95": 13.69164938223548,
+          "max": 19.059124926570803
+        },
+        "peak_queue_depth": 30,
+        "peak_memory": {
+          "cuda_peak_allocated_bytes": 66131968,
+          "cuda_peak_reserved_bytes": 553648128,
+          "process_peak_resident_bytes": 1500266496,
+          "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+          "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+        }
+      }
+    },
+    {
+      "model": "squeezenet1_1",
+      "device": "cuda",
+      "repeat": 1,
+      "policy": "deadline",
+      "schedule_hash": "f32898acfe5a6f79e93d5b6fec3e474b0e6528692e35aa50d699d051aebeab1a",
+      "summary": {
+        "submitted": 57,
+        "admitted": 57,
+        "completed_on_time": 57,
+        "completed_late": 0,
+        "expired": 0,
+        "rejected": 0,
+        "failed": 0,
+        "cancelled_queued": 0,
+        "cancelled_in_flight": 0,
+        "completed": 57,
+        "planned": 57,
+        "unsubmitted_cancelled": 0,
+        "elapsed_s": 0.6,
+        "throughput_rps": 95.0,
+        "completion_rate": 1.0,
+        "deadline_success_fraction": 1.0,
+        "discarded": 0,
+        "latency_ms": {
+          "p50": 139.76373838522704,
+          "p95": 205.47247752692783,
+          "p99": 213.2894307738752
+        },
+        "latency_sample_count": 57,
+        "mean_batch_size": 3.8,
+        "generator_lateness_ms": {
+          "p95": 14.494406769517806,
+          "max": 16.58052470884286
+        },
+        "peak_queue_depth": 29,
+        "peak_memory": {
+          "cuda_peak_allocated_bytes": 66131968,
+          "cuda_peak_reserved_bytes": 553648128,
+          "process_peak_resident_bytes": 1500266496,
+          "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+          "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+        }
+      }
+    },
+    {
+      "model": "squeezenet1_1",
+      "device": "cuda",
+      "repeat": 1,
+      "policy": "fifo",
+      "schedule_hash": "f32898acfe5a6f79e93d5b6fec3e474b0e6528692e35aa50d699d051aebeab1a",
+      "summary": {
+        "submitted": 57,
+        "admitted": 57,
+        "completed_on_time": 57,
+        "completed_late": 0,
+        "expired": 0,
+        "rejected": 0,
+        "failed": 0,
+        "cancelled_queued": 0,
+        "cancelled_in_flight": 0,
+        "completed": 57,
+        "planned": 57,
+        "unsubmitted_cancelled": 0,
+        "elapsed_s": 1.276896499999566,
+        "throughput_rps": 44.63948330974309,
+        "completion_rate": 1.0,
+        "deadline_success_fraction": 1.0,
+        "discarded": 0,
+        "latency_ms": {
+          "p50": 613.0512072486454,
+          "p95": 953.2934132381341,
+          "p99": 989.4006799851195
+        },
+        "latency_sample_count": 57,
+        "mean_batch_size": 1.0,
+        "generator_lateness_ms": {
+          "p95": 12.524200233747251,
+          "max": 13.846676323737483
+        },
+        "peak_queue_depth": 44,
+        "peak_memory": {
+          "cuda_peak_allocated_bytes": 59614208,
+          "cuda_peak_reserved_bytes": 553648128,
+          "process_peak_resident_bytes": 1500266496,
+          "process_peak_scope": "process lifetime high-water mark; includes preparation and earlier runs",
+          "cuda_peak_scope": "since replay warmup; reserved bytes include cached warmup blocks"
+        }
+      }
+    }
+  ]
+}
