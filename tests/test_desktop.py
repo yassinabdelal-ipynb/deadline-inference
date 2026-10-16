@@ -135,19 +135,33 @@ class NativeDesktopTests(unittest.TestCase):
         result = measured_result()
         self.controller.state.update(status="completed", results=[result], config=result["config"])
         self.app._render(self.controller.snapshot())
-        # Aqua delivers native Configure events through the full event loop,
-        # sometimes after idle layout work. Wait for actual drawable geometry
-        # rather than treating one update_idletasks call as a mapped canvas.
-        deadline = time.monotonic() + 2
-        while time.monotonic() < deadline:
+        sections = self.app.chart.master.master
+        def allocate_chart():
+            self.app.update()
+            # Exercise the same draggable panes a user can resize. Native font
+            # metrics and window-manager limits differ across desktop systems;
+            # a fixed outer geometry cannot promise a particular chart height.
+            height = sections.winfo_height()
+            sections.sashpos(0, int(height * 0.25))
+            sections.sashpos(1, int(height * 0.85))
             self.app.update()
             self.app._draw_chart()
+        def geometry_details():
+            return {"window": self.app.winfo_geometry(), "chart": self.app.chart.winfo_geometry(),
+                    "screen": (self.app.winfo_screenwidth(), self.app.winfo_screenheight()),
+                    "sections": sections.winfo_geometry(),
+                    "sashes": [sections.sashpos(index) for index in (0, 1)]}
+        # Aqua delivers Configure events through the full event loop. Allocate
+        # chart space from actual container dimensions before checking drawing.
+        deadline = time.monotonic() + 2
+        while time.monotonic() < deadline:
+            allocate_chart()
             if self.app.chart.winfo_width() > 100 and self.app.chart.winfo_height() >= 80 and self.app.chart.find_all():
                 break
             time.sleep(0.01)
         self.assertIn("OK", self.app.accounting.get())
         self.assertGreater(len(self.app.results_table.get_children()), 15)
-        self.assertGreater(len(self.app.chart.find_all()), 0)
+        self.assertGreater(len(self.app.chart.find_all()), 0, geometry_details())
         self.assertEqual(str(self.app.json_button["state"]), "normal")
         with scratch_directory() as folder:
             path = Path(folder) / "desktop report.json"
@@ -159,12 +173,12 @@ class NativeDesktopTests(unittest.TestCase):
         self.app.geometry("1000x690")
         deadline = time.monotonic() + 2
         while time.monotonic() < deadline:
-            self.app.update()
+            allocate_chart()
             if self.app.chart.winfo_width() > 100 and self.app.chart.winfo_height() > 60:
                 break
             time.sleep(0.01)
-        self.assertGreater(self.app.chart.winfo_width(), 100)
-        self.assertGreater(self.app.chart.winfo_height(), 60)
+        self.assertGreater(self.app.chart.winfo_width(), 100, geometry_details())
+        self.assertGreater(self.app.chart.winfo_height(), 60, geometry_details())
 
     def test_close_requests_cancellation_without_blocking(self):
         self.app.run()

@@ -176,7 +176,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File scripts/test.ps1 -Hardware
 [60–90 second demo](docs/DEMO.md)
 
 The local 0.3.1 source verification passed **96 tests with no skips** in
-**28.681 seconds**, including opt-in real CPU/CUDA model checks and release
+**47.700 seconds**, including opt-in real CPU/CUDA model checks and release
 infrastructure tests. A fresh native CUDA smoke test also passed on the actual
 RTX 5060. This is local verification, separate from GitHub CI and separate-PC
 desktop testing.

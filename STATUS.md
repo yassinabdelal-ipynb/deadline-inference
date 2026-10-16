@@ -8,7 +8,7 @@ uses the separately configured source environment.
 
 ## Completed locally
 
-- Full hardware-enabled source suite: **96 tests passed, no skips**, in **28.681
+- Full hardware-enabled source suite: **96 tests passed, no skips**, in **47.700
   seconds**. Command: `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/test.ps1 -Hardware`.
 - A fresh native desktop smoke test explicitly requested **CUDA**, completed both
   real inference replays, and verified actual backend identity, results, final
@@ -26,10 +26,11 @@ uses the separately configured source environment.
 
 ## Release verification
 
-The versioned Windows CPU bundle is being rebuilt and checked separately.
-Consult the release notes and `docs/public/verification.json` for the final
-extracted-application result. Source CUDA detection never substitutes for
-running the frozen CPU application's own libraries.
+The rebuilt Windows CPU ZIP passed all four real-model smoke cases after
+extraction to a new path containing spaces. Its own CPU runtime accounted for
+**96 submissions: 87 on time, 4 late and 5 expired, with zero failed work**.
+Source CUDA detection was not substituted for frozen-application testing.
+See `docs/public/verification.json` for per-model outcomes.
 
 ## Compatibility boundaries
 

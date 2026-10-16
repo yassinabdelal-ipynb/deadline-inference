@@ -4,7 +4,7 @@
   "scope": "Local Windows laptop; hosted CI results are on GitHub Actions, not implied here.",
   "source_tests": {
     "count": 96,
-    "duration_seconds": 28.681,
+    "duration_seconds": 47.7,
     "passed": true,
     "hardware_enabled": true,
     "skipped": 0,
@@ -44,7 +44,126 @@
     ]
   },
   "windows_cpu_release": {
-    "verified": false,
-    "note": "Rebuild and extracted-application verification pending."
+    "verified": true,
+    "version": "0.3.1",
+    "platform": "Windows x64",
+    "scope": "Whole CPU ZIP extracted to a new path containing spaces on the local Windows host, using the frozen application\u2019s own libraries.",
+    "torch_version": "2.12.0+cpu",
+    "native_tk_version": "9.0.4",
+    "server_started": false,
+    "model_checks": [
+      {
+        "model": "mobilenet_v3_small",
+        "checks_passed": true,
+        "run_enabled": true,
+        "cancel_disabled": true,
+        "policy_summaries": [
+          {
+            "submitted": 12,
+            "completed_on_time": 12,
+            "completed_late": 0,
+            "expired": 0,
+            "rejected": 0,
+            "failed": 0,
+            "cancelled_queued": 0,
+            "cancelled_in_flight": 0
+          },
+          {
+            "submitted": 12,
+            "completed_on_time": 12,
+            "completed_late": 0,
+            "expired": 0,
+            "rejected": 0,
+            "failed": 0,
+            "cancelled_queued": 0,
+            "cancelled_in_flight": 0
+          }
+        ]
+      },
+      {
+        "model": "resnet18",
+        "checks_passed": true,
+        "run_enabled": true,
+        "cancel_disabled": true,
+        "policy_summaries": [
+          {
+            "submitted": 12,
+            "completed_on_time": 7,
+            "completed_late": 2,
+            "expired": 3,
+            "rejected": 0,
+            "failed": 0,
+            "cancelled_queued": 0,
+            "cancelled_in_flight": 0
+          },
+          {
+            "submitted": 12,
+            "completed_on_time": 8,
+            "completed_late": 2,
+            "expired": 2,
+            "rejected": 0,
+            "failed": 0,
+            "cancelled_queued": 0,
+            "cancelled_in_flight": 0
+          }
+        ]
+      },
+      {
+        "model": "efficientnet_b0",
+        "checks_passed": true,
+        "run_enabled": true,
+        "cancel_disabled": true,
+        "policy_summaries": [
+          {
+            "submitted": 12,
+            "completed_on_time": 12,
+            "completed_late": 0,
+            "expired": 0,
+            "rejected": 0,
+            "failed": 0,
+            "cancelled_queued": 0,
+            "cancelled_in_flight": 0
+          },
+          {
+            "submitted": 12,
+            "completed_on_time": 12,
+            "completed_late": 0,
+            "expired": 0,
+            "rejected": 0,
+            "failed": 0,
+            "cancelled_queued": 0,
+            "cancelled_in_flight": 0
+          }
+        ]
+      },
+      {
+        "model": "squeezenet1_1",
+        "checks_passed": true,
+        "run_enabled": true,
+        "cancel_disabled": true,
+        "policy_summaries": [
+          {
+            "submitted": 12,
+            "completed_on_time": 12,
+            "completed_late": 0,
+            "expired": 0,
+            "rejected": 0,
+            "failed": 0,
+            "cancelled_queued": 0,
+            "cancelled_in_flight": 0
+          },
+          {
+            "submitted": 12,
+            "completed_on_time": 12,
+            "completed_late": 0,
+            "expired": 0,
+            "rejected": 0,
+            "failed": 0,
+            "cancelled_queued": 0,
+            "cancelled_in_flight": 0
+          }
+        ]
+      }
+    ]
   }
 }

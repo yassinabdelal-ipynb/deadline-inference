@@ -28,7 +28,7 @@ Included capabilities:
 
 ### Verification scope
 
-The local source suite passed **96 tests with no skips in 28.681 seconds**,
+The local source suite passed **96 tests with no skips in 47.700 seconds**,
 including real CPU/CUDA model and release-infrastructure checks. A fresh native
 desktop CUDA smoke test passed on the actual RTX 5060. These are local results;
 they do not establish identical performance or desktop compatibility elsewhere.
